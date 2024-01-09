@@ -6,7 +6,7 @@
 ## Install the Following Dependencies
 
 ```sh
-npm install 
+npm install @react-navigation/native-stack @react-navigation/native @expo-google-fonts/poppins 
 ```
 
 ## Usage
