@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+HEAD
 Install the following dependencies
 =======
 <h1 align="center">Welcome to fbla24 👋</h1>
