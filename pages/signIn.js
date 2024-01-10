@@ -1,10 +1,14 @@
+// ios: 459354272716-e4v89j84g5af8h0jrspk1ohmup7uoigu.apps.googleusercontent.com
+
 import React from 'react';
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 
+import GoogleSignIn from '../components/googleSignIn';
+
 const img = 'https://assets.api.uizard.io/api/cdn/stream/28695123-53b2-493d-941a-ff98edcbefdf.png';
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
         Poppins_300Light,
@@ -124,7 +128,9 @@ export default function SignIn() {
             />
             <Text style={styles.tiny}>Forgot your password?</Text>
             <View style={styles.buttonContainer}>
-                <Button />
+                <Button
+                    onPress={() => navigation.navigate('Profile')}
+                />
             </View>
             <View style={styles.miniCardContainer}>
                 <OrLineLeft />
@@ -165,7 +171,7 @@ const Button = (props) => {
     });
 
     return (
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={props.onPress}>
             <Text style={styles.text}>{props.label ?? 'Sign In'}</Text>
         </TouchableOpacity>
     );
@@ -244,32 +250,8 @@ const OrLineRight = () => {
 
 // Sign in with google button
 const GoogleButton = (props) => {
-    const styles = StyleSheet.create({
-        button: {
-            marginTop: 20,
-            width: 164,
-            height: 48,
-            paddingHorizontal: 8,
-            borderWidth: 1,
-            borderColor: '#0e0e0e',
-            borderRadius: 12,
-            backgroundColor: '#ffffff',
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-        text: {
-            color: '#0e0e0e',
-            fontSize: 16,
-            fontFamily: 'Poppins_600SemiBold',
-            fontWeight: 'bold',
-            lineHeight: 20,
-        }
-    });
-
     return (
-        <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>{props.label ?? 'Google'}</Text>
-        </TouchableOpacity>
+        <GoogleSignIn />
     );
 }
 
