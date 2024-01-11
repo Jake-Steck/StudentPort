@@ -12,8 +12,9 @@ export default function GoogleSignInButton() {
     });
 
     useEffect(() => {
-        if (response) {
-            handleGoogleSignIn(response);
+        if (response?.type === 'success') {
+            const { authentication } = response;
+            handleGoogleSignIn(authentication);
         }
     }, [response]);
 
