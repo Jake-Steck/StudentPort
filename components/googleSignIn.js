@@ -1,54 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
+import { useFonts, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import * as Google from 'expo-auth-session/providers/google';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function GoogleSignInButton() {
     const [userInfo, setUserInfo] = useState(null);
     const [request, response, promptAsync] = Google.useAuthRequest({
-        iosClientId: '459354272716-e4v89j84g5af8h0jrspk1ohmup7uoigu.apps.googleusercontent.com'
+        iosClientId: '459354272716-e4v89j84g5af8h0jrspk1ohmup7uoigu.apps.googleusercontent.com',
+        webClientId: '459354272716-8fcd6tq1lou02f5fksf2ifvh7nb9otv6.apps.googleusercontent.com',
     });
 
-    async function handleGoogleSignIn() {
-        try {
-            const result = await promptAsync();
+    useEffect(() => {
+        if (response) {
+            handleGoogleSignIn(response);
+        }
+    }, [response]);
 
-            if (result?.type === 'success' && result.authentication?.accessToken) {
-                const { authentication } = result;
-
-                // Call your function to get user info using the access token
-                await getUserInfo(authentication.accessToken);
-            } else if (result?.type === 'cancel') {
-                // Handle case where the user cancels the sign-in
-                console.log('Google sign-in cancelled');
-            } else {
-                // Handle other cases
-                console.log('Google sign-in failed');
+    async function handleGoogleSignIn(response) {
+        const user = await AsyncStorage.getItem('@user');
+        if (user) {
+            setUserInfo(JSON.parse(user));
+        } else {
+            if (response?.type === 'success' && response.authentication?.accessToken) {
+                await getUserInfo(response.authentication.accessToken);
             }
-        } catch (error) {
-            console.error('Error during Google sign-in:', error);
         }
     }
 
-
     const getUserInfo = async (token) => {
+        if (!token) {
+            return;
+        }
         try {
             const response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
-            const user = await response.json();
+            if (!response.ok) {
+                console.error('Failed to fetch user info:', response.status, response.statusText);
+                return;
+            }
 
-            // Save user info to AsyncStorage
-            await AsyncStorage.setItem('@user', JSON.stringify(user));
-
-            // Update state with user info
-            setUserInfo(user);
+            const userInfo = await response.json();
+            setUserInfo(userInfo);
+            await AsyncStorage.setItem('@user', JSON.stringify(userInfo));
         } catch (e) {
-            console.error('Error getting user info:', e);
+            console.error('Error during fetch:', e);
         }
     };
+
+    console.log(JSON.stringify(userInfo)); // For Debugging
+
 
     const styles = StyleSheet.create({
         button: {
@@ -72,13 +75,11 @@ export default function GoogleSignInButton() {
         },
     });
 
-    console.log(JSON.stringify(userInfo));
-
     return (
         <View>
-            <TouchableOpacity style={styles.button} onPress={handleGoogleSignIn} >
+            <TouchableOpacity style={styles.button} onPress={() => promptAsync()}>
                 <Text style={styles.text}>Google</Text>
-            </TouchableOpacity >
+            </TouchableOpacity>
         </View>
     );
 }
