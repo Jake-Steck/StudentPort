@@ -3,8 +3,11 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import * as Google from 'expo-auth-session/providers/google';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import Profile from '../pages/profile';
 
 export default function GoogleSignInButton() {
+    const navigation = useNavigation();
     const [userInfo, setUserInfo] = useState(null);
     const [request, response, promptAsync] = Google.useAuthRequest({
         iosClientId: '459354272716-e4v89j84g5af8h0jrspk1ohmup7uoigu.apps.googleusercontent.com',
@@ -22,12 +25,15 @@ export default function GoogleSignInButton() {
         const user = await AsyncStorage.getItem('@user');
         if (user) {
             setUserInfo(JSON.parse(user));
+            navigation.navigate('Profile');
         } else {
             if (response?.type === 'success' && response.authentication?.accessToken) {
                 await getUserInfo(response.authentication.accessToken);
+
             }
         }
     }
+
 
     const getUserInfo = async (token) => {
         if (!token) {
