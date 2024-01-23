@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import OpenScreen from './pages/openScreen';
@@ -11,6 +12,7 @@ import CreateAccount from './pages/createAccount';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
   return (
     <NavigationContainer>
       <Stack.Navigator
