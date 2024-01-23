@@ -126,7 +126,7 @@ export default function SignIn({ navigation }) {
                 style={styles.input}
                 placeholder='Password'
             />
-            <Text style={styles.tiny}>Forgot your password?</Text>
+            <Text style={styles.tiny} onPress={() => navigation.navigate('ForgotPassword')}>Forgot your password?</Text>
             <View style={styles.buttonContainer}>
                 <Button
                     onPress={() => navigation.navigate('Profile')}
@@ -142,7 +142,7 @@ export default function SignIn({ navigation }) {
                 <View style={styles.spacer} />
                 <FacebookButton />
             </View>
-            <Text style={styles.tiny2}>Need an account? Register</Text>
+            <Text style={styles.tiny2} onPress={() => navigation.navigate('CreateAccount')}>Need an account? Register</Text>
         </View>
     );
 }
