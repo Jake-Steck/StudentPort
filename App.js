@@ -5,6 +5,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import OpenScreen from './pages/openScreen';
 import SignIn from './pages/signIn'
 import Profile from './pages/profile'
+import ForgotPassword from './pages/forgotPassword'
+import CreateAccount from './pages/createAccount';
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -19,6 +22,8 @@ export default function App() {
         <Stack.Screen name="OpenScreen" component={OpenScreen} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name="CreateAccount" component={CreateAccount} />
       </Stack.Navigator>
     </NavigationContainer>
   );
