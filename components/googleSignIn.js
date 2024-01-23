@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { useFonts, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import * as Google from 'expo-auth-session/providers/google';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import Profile from '../pages/profile';
 
 export default function GoogleSignInButton() {
     const navigation = useNavigation();
