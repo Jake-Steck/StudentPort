@@ -61,7 +61,7 @@ export default function GoogleSignInButton() {
     const styles = StyleSheet.create({
         button: {
             marginTop: 20,
-            width: 164,
+            width: 335,
             height: 48,
             paddingHorizontal: 8,
             borderWidth: 1,
@@ -83,7 +83,7 @@ export default function GoogleSignInButton() {
     return (
         <View>
             <TouchableOpacity style={styles.button} onPress={() => promptAsync()}>
-                <Text style={styles.text}>Google</Text>
+                <Text style={styles.text}>Sign in With Google</Text>
             </TouchableOpacity>
         </View>
     );

@@ -140,7 +140,6 @@ export default function SignIn({ navigation }) {
             <View style={styles.buttonContainer2}>
                 <GoogleButton />
                 <View style={styles.spacer} />
-                <FacebookButton />
             </View>
             <Text style={styles.tiny2} onPress={() => navigation.navigate('CreateAccount')}>Need an account? Register</Text>
         </View>
@@ -256,32 +255,3 @@ const GoogleButton = (props) => {
 }
 
 // Sign in with facebook button
-const FacebookButton = (props) => {
-    const styles = StyleSheet.create({
-        button: {
-            marginTop: 20,
-            width: 164,
-            height: 48,
-            paddingHorizontal: 8,
-            borderWidth: 1,
-            borderColor: '#0e0e0e',
-            borderRadius: 12,
-            backgroundColor: '#ffffff',
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-        text: {
-            color: '#0e0e0e',
-            fontSize: 16,
-            fontFamily: 'Poppins_600SemiBold',
-            fontWeight: 'bold',
-            lineHeight: 20,
-        }
-    });
-
-    return (
-        <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>{props.label ?? 'Facebook'}</Text>
-        </TouchableOpacity>
-    );
-}
