@@ -6,7 +6,9 @@
 ## Install the Following Dependencies
 
 ```sh
-npm install @react-navigation/native-stack @react-navigation/native @expo-google-fonts/poppins 
+npm install @react-navigation/native-stack @react-navigation/native @expo-google-fonts/poppins
+npm install --save @react-native-firebase/app
+
 ```
 
 ## Usage
