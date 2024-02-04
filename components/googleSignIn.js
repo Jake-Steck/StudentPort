@@ -23,7 +23,7 @@ export default function GoogleSignInButton() {
         const user = await AsyncStorage.getItem('@user');
         if (user) {
             setUserInfo(JSON.parse(user));
-            navigation.navigate('Profile');
+            navigation.navigate('Profile', { userInfo });
         } else {
             if (response?.type === 'success' && response.authentication?.accessToken) {
                 await getUserInfo(response.authentication.accessToken);

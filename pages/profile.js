@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 
-export default function Profile() {
+export default function Profile({ route }) {
+    const userInfo = route.params?.userInfo;
+    console.log(userInfo);
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
         Poppins_300Light,
@@ -16,7 +18,7 @@ export default function Profile() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Profile</Text>
+            <Text style={styles.text}>{userInfo?.name}</Text>
         </View>
     );
 }
