@@ -18,7 +18,7 @@ export default function Profile({ route }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{userInfo?.name}</Text>
+            <Text style={styles.text}>Service</Text>
         </View>
     );
 }
