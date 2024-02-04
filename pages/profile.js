@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from 'reac
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 
 export default function Profile({ route }) {
-    const userInfo = route.params?.userInfo;
+    const { userInfo } = route.params;
     console.log(userInfo);
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
