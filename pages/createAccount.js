@@ -2,11 +2,32 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../firebaseConfig.js";
+import { useState } from 'react';
 
 const img = 'https://assets.api.uizard.io/api/cdn/stream/28695123-53b2-493d-941a-ff98edcbefdf.png';
 
 export default function CreateAccount({ navigation }) {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    let signUp = () => {
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed up 
+            const user = userCredential.user;
+            navigation.navigate('Profile')
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+        });
+    }
+
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
         Poppins_300Light,
@@ -115,13 +136,17 @@ export default function CreateAccount({ navigation }) {
             <TextInput
                 style={styles.input}
                 placeholder="Email"
+                value={email}
+                onChangeText={text => setEmail(text)}
             />
             <TextInput
                 style={styles.input}
                 placeholder="Password"
                 secureTextEntry={true}
+                value={password}
+                onChangeText={text => setPassword(text)}
             />
-            <Button onPress={() => navigation.navigate('Profile')} />
+            <Button onPress={() => signUp()} />
         </View>
     );
 }
@@ -148,6 +173,7 @@ const Button = (props) => {
             lineHeight: 20,
         }
     });
+        
 
     return (
         <TouchableOpacity style={styles.button} onPress={props.onPress}>
