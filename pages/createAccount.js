@@ -24,7 +24,7 @@ export default function CreateAccount({ navigation }) {
                 updateProfile(auth.currentUser, {
                     displayName: `${firstName} ${lastName}`,
                 }).then(() => {
-                    navigation.navigate('Profile');
+                    navigation.navigate('Profile', { userInfo: auth.currentUser.displayName });
                 }).catch((error) => {
                     console.error("Error updating profile: ", error);
                 });
@@ -33,11 +33,15 @@ export default function CreateAccount({ navigation }) {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.error("Error creating user: ", errorMessage);
-                alert("Email already in use! Please enter a different email, or sign in with the existing account.");
+                if (errorCode === 'auth/weak-password') {
+                    alert('The password is too weak. Please make sure it is longer than 6 characters.');
+                }
+                if (errorCode === 'auth/email-already-in-use') {
+                    alert('The email is already in use.');
+                }
             });
-        console.log("Full Name: " + firstName + " " + lastName);
     }
-
+    // console.log(auth.currentUser); // For Debugging
 
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,

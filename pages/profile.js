@@ -4,7 +4,7 @@ import { useFonts, Poppins_700Bold, Poppins_400Regular } from '@expo-google-font
 import { AntDesign } from '@expo/vector-icons';
 
 export default function Profile({ route }) {
-    // const { userInfo } = route.params;
+    const { userInfo } = route.params;
 
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
@@ -20,7 +20,7 @@ export default function Profile({ route }) {
             <View style={styles.headerContainer}>
                 <View style={styles.circle} />
                 <View style={styles.textContainer}>
-                    {/* <Text style={styles.nameText}>{userInfo?.name}</Text> */}
+                    <Text style={styles.nameText}>{userInfo?.name || userInfo}</Text>
                     <Text style={styles.subText}>School</Text>
                 </View>
             </View>
