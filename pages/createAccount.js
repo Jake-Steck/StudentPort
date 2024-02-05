@@ -2,7 +2,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebaseConfig.js";
 import { useState } from 'react';
 
@@ -12,21 +12,32 @@ export default function CreateAccount({ navigation }) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
 
     let signUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed up 
                 const user = userCredential.user;
-                navigation.navigate('Profile')
-                // ...
+
+                // Update user profile with first and last name
+                updateProfile(auth.currentUser, {
+                    displayName: `${firstName} ${lastName}`,
+                }).then(() => {
+                    navigation.navigate('Profile');
+                }).catch((error) => {
+                    console.error("Error updating profile: ", error);
+                });
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // ..
+                console.error("Error creating user: ", errorMessage);
+                alert("Email already in use! Please enter a different email, or sign in with the existing account.");
             });
+        console.log("Full Name: " + firstName + " " + lastName);
     }
+
 
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
@@ -133,6 +144,19 @@ export default function CreateAccount({ navigation }) {
             />
             <Text style={styles.header}>StudentPort</Text>
             <Text style={styles.sub}>Your achievements in one place!</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="First Name"
+                value={firstName}
+                onChangeText={text => setFirstName(text)}
+            />
+
+            <TextInput
+                style={styles.input}
+                placeholder="Last Name"
+                value={lastName}
+                onChangeText={text => setLastName(text)}
+            />
             <TextInput
                 style={styles.input}
                 placeholder="Email"
