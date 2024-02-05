@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "fbla24",
+    "scheme": "fbla24",
     "slug": "fbla24",
     "version": "1.0.0",
     "orientation": "portrait",
