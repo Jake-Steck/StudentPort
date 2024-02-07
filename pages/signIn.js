@@ -3,12 +3,38 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebaseConfig.js";
+import { useState } from 'react';
 
 import GoogleSignIn from '../components/googleSignIn';
 
 const img = 'https://assets.api.uizard.io/api/cdn/stream/28695123-53b2-493d-941a-ff98edcbefdf.png';
 
 export default function SignIn({ navigation }) {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    let signIn = () => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                navigation.navigate('Profile')
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if(errorCode === "auth/invalid-credential") {
+                    alert("Invalid Credentials");
+                } else if(errorCode === "auth/invalid-email") {
+                    alert("Invalid Email");
+                }
+            });
+    } 
+
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
         Poppins_300Light,
@@ -119,17 +145,20 @@ export default function SignIn({ navigation }) {
             <Text style={styles.header}>StudentPort</Text>
             <Text style={styles.sub}>Your achievements in one place!</Text>
             <TextInput
+                onChangeText={text => setEmail(text)}
                 style={styles.input}
                 placeholder="Email"
             />
             <TextInput
+                onChangeText={text => setPassword(text)}
                 style={styles.input}
                 placeholder='Password'
             />
             <Text style={styles.tiny} onPress={() => navigation.navigate('ForgotPassword')}>Forgot your password?</Text>
             <View style={styles.buttonContainer}>
                 <Button
-                    onPress={() => navigation.navigate('Profile')}
+                    // Signin button
+                    onPress={() => signIn()}
                 />
             </View>
             <View style={styles.miniCardContainer}>

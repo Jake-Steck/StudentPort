@@ -2,11 +2,32 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
-
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth, } from "../firebaseConfig.js";
+import { useState } from 'react';
 
 const img = 'https://assets.api.uizard.io/api/cdn/stream/28695123-53b2-493d-941a-ff98edcbefdf.png';
 
 export default function ForgotPassword({ navigation }) {
+
+    const [email, setEmail] = useState("");
+
+    let resetPassword = () => {
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                // Password reset email sent!
+                // ..
+                alert("Reset Password Email Sent");
+                navigation.navigate('SignIn')
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+                // ..
+            });
+    }
+
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
         Poppins_300Light,
@@ -113,10 +134,11 @@ export default function ForgotPassword({ navigation }) {
             <Text style={styles.header}>StudentPort</Text>
             <Text style={styles.sub}>Your achievements in one place!</Text>
             <TextInput
+                onChangeText={text => setEmail(text)}
                 style={styles.input}
                 placeholder="Email"
             />
-            <Button onPress={() => navigation.navigate('SignIn')} />
+            <Button onPress={() => resetPassword()} />
         </View>
     );
 }
