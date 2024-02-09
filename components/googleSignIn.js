@@ -19,10 +19,15 @@ export default function GoogleSignInButton() {
         }
     }, [response]);
 
+    useEffect(() => {
+        console.log(JSON.stringify(userInfo));
+    }, [userInfo]);
+
+
     async function handleGoogleSignIn(response) {
         const user = await AsyncStorage.getItem('@user');
         if (user) {
-            setUserInfo(JSON.parse(user));
+            const userInfo = JSON.parse(user);
             navigation.navigate('Profile', { userInfo });
         } else {
             if (response?.type === 'success' && response.authentication?.accessToken) {

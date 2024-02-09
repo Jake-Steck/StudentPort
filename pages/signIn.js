@@ -21,19 +21,20 @@ export default function SignIn({ navigation }) {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                navigation.navigate('Profile')
+                console.log(user.displayName);
+                navigation.navigate('Profile', { userInfo: user.displayName })
                 // ...
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                if(errorCode === "auth/invalid-credential") {
+                if (errorCode === "auth/invalid-credential") {
                     alert("Invalid Credentials");
-                } else if(errorCode === "auth/invalid-email") {
+                } else if (errorCode === "auth/invalid-email") {
                     alert("Invalid Email");
                 }
             });
-    } 
+    }
 
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
@@ -153,6 +154,7 @@ export default function SignIn({ navigation }) {
                 onChangeText={text => setPassword(text)}
                 style={styles.input}
                 placeholder='Password'
+                secureTextEntry={true}
             />
             <Text style={styles.tiny} onPress={() => navigation.navigate('ForgotPassword')}>Forgot your password?</Text>
             <View style={styles.buttonContainer}>
