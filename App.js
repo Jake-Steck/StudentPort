@@ -8,6 +8,7 @@ import SignIn from './pages/signIn'
 import Profile from './pages/profile'
 import ForgotPassword from './pages/forgotPassword'
 import CreateAccount from './pages/createAccount';
+import Portfolio from './pages/portfolio';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ export default function App() {
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="CreateAccount" component={CreateAccount} />
+        <Stack.Screen name="Portfolio" component={Portfolio} />
       </Stack.Navigator>
     </NavigationContainer>
   );
