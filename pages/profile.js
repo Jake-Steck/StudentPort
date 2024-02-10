@@ -2,9 +2,12 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_400Regular } from '@expo-google-fonts/poppins';
 import { AntDesign } from '@expo/vector-icons';
+import Portfolio from './portfolio';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Profile({ route }) {
     const { userInfo } = route.params;
+    const navigation = useNavigation();
 
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
@@ -26,6 +29,10 @@ export default function Profile({ route }) {
             </View>
             <TouchableOpacity style={styles.button}>
                 <Text style={styles.buttonText}>Classes</Text>
+                <AntDesign name="right" size={15} color="black" style={styles.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Portfolio')}>
+                <Text style={styles.buttonText}>Portfolio**Delete When Done</Text>
                 <AntDesign name="right" size={15} color="black" style={styles.icon} />
             </TouchableOpacity>
         </View>
