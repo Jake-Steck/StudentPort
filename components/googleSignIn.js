@@ -3,6 +3,9 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Google from 'expo-auth-session/providers/google';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+import { auth } from "../firebaseConfig.js";
+
 
 export default function GoogleSignInButton() {
     const navigation = useNavigation();
@@ -14,8 +17,7 @@ export default function GoogleSignInButton() {
 
     useEffect(() => {
         if (response?.type === 'success') {
-            const { authentication } = response;
-            handleGoogleSignIn(authentication);
+            handleGoogleSignIn(response);
         }
     }, [response]);
 
@@ -25,17 +27,23 @@ export default function GoogleSignInButton() {
 
 
     async function handleGoogleSignIn(response) {
-        const user = await AsyncStorage.getItem('@user');
-        if (user) {
-            const userInfo = JSON.parse(user);
-            navigation.navigate('Profile', { userInfo });
-        } else {
-            if (response?.type === 'success' && response.authentication?.accessToken) {
-                await getUserInfo(response.authentication.accessToken);
+        if (response?.type === 'success') {
+            const { id_token } = response.params;
 
+            try {
+                const credential = GoogleAuthProvider.credential(id_token);
+                const authResult = await signInWithCredential(auth, credential);
+
+                navigation.navigate('Profile', { userInfo: authResult.user.displayName });
+
+                // Continue with fetching user info if needed
+                await getUserInfo(response.authentication.accessToken);
+            } catch (error) {
+                console.error('Firebase authentication failed:', error);
             }
         }
     }
+
 
 
     const getUserInfo = async (token) => {
