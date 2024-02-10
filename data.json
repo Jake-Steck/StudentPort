@@ -1,0 +1,26 @@
+{
+    "classes": [
+        {
+            "id": "c1",
+            "name": "English",
+            "category": "Classes"
+        },
+        {
+            "id": "c2",
+            "name": "Physics",
+            "category": "Classes"
+        }
+    ],
+    "athletics": [
+        {
+            "id": "s1",
+            "name": "Sport 1",
+            "category": "Athletics"
+        },
+        {
+            "id": "s2",
+            "name": "Sport 2",
+            "category": "Athletics"
+        }
+    ]
+}
