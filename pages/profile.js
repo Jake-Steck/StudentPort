@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_400Regular } from '@expo-google-fonts/poppins';
 import { AntDesign } from '@expo/vector-icons';
-import Portfolio from './portfolio';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Profile({ route }) {

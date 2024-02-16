@@ -1,17 +1,17 @@
 {
-    "classes": [
+    "items": [
         {
-            "id": "c1",
-            "name": "English",
-            "category": "Classes"
+            "id": "english_1",
+            "name": "English 1",
+            "category": "Classes",
+            "type": "Language Arts"
         },
         {
-            "id": "c2",
-            "name": "Physics",
-            "category": "Classes"
-        }
-    ],
-    "athletics": [
+            "id": "english_2",
+            "name": "English 2",
+            "category": "Classes",
+            "type": "Language Arts"
+        },
         {
             "id": "s1",
             "name": "Sport 1",
