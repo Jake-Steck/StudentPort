@@ -1,17 +1,35 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import data from '../data.json';
+import ClassesModal from '../components/classModal';
+import AthleticsModal from '../components/athleticModal';
 
 const Portfolio = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [selectedType, setSelectedType] = useState('All');
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
 
     const renderCategory = (category) => {
         return (
-            <TouchableOpacity onPress={() => setSelectedCategory(category)}>
+            <TouchableOpacity onPress={() => handleCategoryClick(category)}>
                 <Text style={selectedCategory === category ? styles.activeCategory : styles.category}>{category}</Text>
             </TouchableOpacity>
         );
+    };
+
+    const handleCategoryClick = (category) => {
+        setSelectedCategory(category);
+        setSelectedItem(null); // Reset selectedItem when a category is clicked
+
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
     };
 
     const renderType = (type) => {
@@ -49,13 +67,31 @@ const Portfolio = () => {
         return null;
     };
 
+    const renderItemModal = () => {
+        if (selectedItem && isModalVisible) {
+            console.log(selectedItem.category)
+            if (selectedCategory === 'All') {
+                if (selectedItem.category === 'Classes') {
+                    return <ClassesModal item={selectedItem} isVisible={isModalVisible} onClose={closeModal} />;
+                } else if (selectedItem.category === 'Athletics') {
+                    return <AthleticsModal item={selectedItem} isVisible={isModalVisible} onClose={closeModal} />;
+                }
+            } else if (selectedCategory === 'Classes') {
+                return <ClassesModal item={selectedItem} isVisible={isModalVisible} onClose={closeModal} />;
+            } else if (selectedCategory === 'Athletics') {
+                return <AthleticsModal item={selectedItem} isVisible={isModalVisible} onClose={closeModal} />;
+            }
+        }
+        return null;
+    };
+
+
     return (
         <View style={styles.container}>
             <View style={styles.categories}>
                 {renderCategory('All')}
                 {renderCategory('Classes')}
                 {renderCategory('Athletics')}
-                {/* Add more categories as needed */}
             </View>
 
             {renderTypeButtons()}
@@ -64,11 +100,15 @@ const Portfolio = () => {
                 data={getFilteredData()}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <View style={styles.item}>
-                        <Text>{item.name}</Text>
-                    </View>
+                    <TouchableOpacity onPress={() => { setSelectedItem(item); toggleModal(); }}>
+                        <View style={styles.item}>
+                            <Text>{item.name}</Text>
+                        </View>
+                    </TouchableOpacity>
                 )}
             />
+
+            {renderItemModal()}
         </View>
     );
 };
