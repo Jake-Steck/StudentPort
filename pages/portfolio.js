@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import athleticsData from '../components/portfolioData/athletics_data.json';
 
 // Class Imports
@@ -16,7 +16,7 @@ const Portfolio = ({ route }) => {
     const allData = [...allClasses, ...athleticsData];
 
     const [selectedTab, setSelectedTab] = useState('All');
-    const [innerTab, setInnerTab] = useState('All'); // State for inner tabs
+    const [innerTab, setInnerTab] = useState('All');
 
     const [filteredData, setFilteredData] = useState(category.data);
 
@@ -25,7 +25,6 @@ const Portfolio = ({ route }) => {
     }, [selectedTab, innerTab, category]);
 
     const filterData = () => {
-        console.log('innerTab:', innerTab);
         if (selectedTab === 'All') {
             setFilteredData(allData);
         } else if (selectedTab === 'Classes') {
@@ -36,14 +35,12 @@ const Portfolio = ({ route }) => {
             });
             console.log('Filtered Data:', filtered);
             setFilteredData(filtered);
+        } else if (selectedTab === 'Athletics') {
+            setFilteredData(athleticsData);
         } else {
-            const filtered = category.data.filter(item => item.label === selectedTab);
-            console.log('Filtered Data:', filtered);
-            setFilteredData(filtered);
+            setFilteredData(category.data);
         }
     };
-
-
 
 
     const handleTabSelect = (tab) => {
@@ -98,59 +95,87 @@ const Portfolio = ({ route }) => {
     }
 
     const renderClassItem = () => {
-        if (selectedTab !== 'Classes') {
-            return null;
-        } else if (innerTab === 'English') {
-
-            return (
-                <FlatList
-                    data={englishClassesData}
-                    renderItem={({ item }) => (
-                        <View style={{ padding: 20 }}>
-                            <Text>{item.label}</Text>
-                        </View>
-                    )}
-                    keyExtractor={item => item.id.toString()}
-                />
-            );
-        } else if (innerTab === 'Business') {
-            return (
-                <FlatList
-                    data={businessClassesData}
-                    renderItem={({ item }) => (
-                        <View style={{ padding: 20 }}>
-                            <Text>{item.label}</Text>
-                        </View>
-                    )}
-                    keyExtractor={item => item.id.toString()}
-                />
-            );
+        if (selectedTab === 'Classes') {
+            switch (innerTab) {
+                case 'English':
+                    return (
+                        <FlatList
+                            data={englishClassesData}
+                            renderItem={({ item }) => (
+                                <View style={styles.filterData}>
+                                    <Text>{item.label}</Text>
+                                </View>
+                            )}
+                            keyExtractor={item => item.id.toString()}
+                        />
+                    );
+                case 'Business':
+                    return (
+                        <FlatList
+                            data={businessClassesData}
+                            renderItem={({ item }) => (
+                                <View style={styles.filterData}>
+                                    <Text>{item.label}</Text>
+                                </View>
+                            )}
+                            keyExtractor={item => item.id.toString()}
+                        />
+                    );
+                default:
+                    return null;
+            }
         }
-    }
+    };
 
     const renderItem = ({ item }) => (
-        <View style={{ padding: 20 }}>
+        <View style={styles.filterData}>
             <Text>{item.label}</Text>
         </View>
     );
 
     return (
-        <View style={{ flex: 1, padding: 20 }}>
-            <View style={{ flexDirection: 'row', marginBottom: 20 }}>
+        <View style={styles.container}>
+            <View style={styles.filterContainer}>
                 {renderTabs()}
             </View>
 
-            <View style={{ flexDirection: 'row' }}>
+            <View style={styles.filterContainer}>
                 {renderClassType()}
-                {renderClassItem()}
-                <FlatList
-                    data={filteredData}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id.toString()}  // Convert to string
-                />
             </View>
+
+            {selectedTab === 'Classes' ? renderClassItem() : null}
+
+            <FlatList
+                data={filteredData}
+                renderItem={renderItem}
+                keyExtractor={item => item.id.toString()}
+            />
         </View>
     );
 };
 
 export default Portfolio;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    filterContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center', // Center the buttons horizontally
+        padding: 10,
+        marginBottom: 20,
+        backgroundColor: 'lightgray',
+    },
+    filterButton: {
+        padding: 10,
+        backgroundColor: 'blue',
+        borderRadius: 8,
+        margin: 5,
+    },
+    filterData: {
+        padding: 20,
+        backgroundColor: 'red',
+        margin: 10,
+    },
+});
