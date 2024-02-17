@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, StyleSheet, Modal } from 'react-native';
+
+// Data Imports
 import athleticsData from '../components/portfolioData/athletics_data.json';
 
 // Class Imports
 import AllClasses from '../components/portfolioData/allClasses';
 import englishClassesData from '../components/portfolioData/classes/english_classes.json';
 import businessClassesData from '../components/portfolioData/classes/business_classes.json';
+
+// Modal Imports
+import classModal from '../components/classModal';
 
 const Portfolio = ({ route }) => {
     console.log('English Classes Data:', englishClassesData);

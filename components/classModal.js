@@ -13,7 +13,6 @@ const ClassModal = ({ isVisible, onClose }) => {
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
                     <Text>Class Modal Content</Text>
-                    {/* Add more details as needed */}
                     <Button title="Close" onPress={onClose} />
                 </View>
             </View>
