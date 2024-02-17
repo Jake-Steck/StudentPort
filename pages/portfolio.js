@@ -10,11 +10,10 @@ import englishClassesData from '../components/portfolioData/classes/english_clas
 import businessClassesData from '../components/portfolioData/classes/business_classes.json';
 
 // Modal Imports
-import classModal from '../components/classModal';
+import ClassModal from '../components/classModal';
+import AthleticModal from '../components/athleticModal';
 
 const Portfolio = ({ route }) => {
-    console.log('English Classes Data:', englishClassesData);
-    console.log('Business Classes Data:', businessClassesData);
 
     const allClasses = AllClasses();
     const { category } = route.params || { category: { data: [] } };
@@ -25,6 +24,9 @@ const Portfolio = ({ route }) => {
 
     const [filteredData, setFilteredData] = useState(category.data);
 
+    const [classModalVisible, setClassModalVisible] = useState(false);
+    const [athleticModalVisible, setAthleticModalVisible] = useState(false);
+
     useEffect(() => {
         filterData();
     }, [selectedTab, innerTab, category]);
@@ -34,8 +36,6 @@ const Portfolio = ({ route }) => {
             setFilteredData(allData);
         } else if (selectedTab === 'Classes') {
             const filtered = allClasses.filter(item => {
-                console.log('Item Label:', item.label); // Log the label of each item
-                console.log('Inner Tab:', innerTab);
                 return innerTab === 'All' ? true : item.label === innerTab;
             });
             console.log('Filtered Data:', filtered);
@@ -47,6 +47,18 @@ const Portfolio = ({ route }) => {
         }
     };
 
+    const handleItemPress = (item) => {
+        if (item.type === "Class") {
+            setClassModalVisible(true);
+        } else if (item.type === 'Sport') {
+            setAthleticModalVisible(true);
+        }
+    };
+
+    const handleModalClose = () => {
+        setClassModalVisible(false);
+        setAthleticModalVisible(false);
+    };
 
     const handleTabSelect = (tab) => {
         setSelectedTab(tab);
@@ -108,7 +120,9 @@ const Portfolio = ({ route }) => {
                             data={englishClassesData}
                             renderItem={({ item }) => (
                                 <View style={styles.filterData}>
-                                    <Text>{item.label}</Text>
+                                    <TouchableOpacity onPress={() => handleItemPress(item)}>
+                                        <Text>{item.label}</Text>
+                                    </TouchableOpacity>
                                 </View>
                             )}
                             keyExtractor={item => item.id.toString()}
@@ -120,7 +134,9 @@ const Portfolio = ({ route }) => {
                             data={businessClassesData}
                             renderItem={({ item }) => (
                                 <View style={styles.filterData}>
-                                    <Text>{item.label}</Text>
+                                    <TouchableOpacity onPress={() => handleItemPress(item)}>
+                                        <Text>{item.label}</Text>
+                                    </TouchableOpacity>
                                 </View>
                             )}
                             keyExtractor={item => item.id.toString()}
@@ -133,9 +149,11 @@ const Portfolio = ({ route }) => {
     };
 
     const renderItem = ({ item }) => (
-        <View style={styles.filterData}>
-            <Text>{item.label}</Text>
-        </View>
+        <TouchableOpacity onPress={() => handleItemPress(item)}>
+            <View style={styles.filterData}>
+                <Text>{item.label}</Text>
+            </View>
+        </TouchableOpacity>
     );
 
     return (
@@ -155,9 +173,12 @@ const Portfolio = ({ route }) => {
                 renderItem={renderItem}
                 keyExtractor={item => item.id.toString()}
             />
+
+            <ClassModal isVisible={classModalVisible} onClose={handleModalClose} />
+            <AthleticModal isVisible={athleticModalVisible} onClose={handleModalClose} />
         </View>
     );
-};
+}
 
 export default Portfolio;
 
