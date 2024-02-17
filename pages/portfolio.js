@@ -1,146 +1,156 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import data from '../data.json';
-import ClassesModal from '../components/classModal';
-import AthleticsModal from '../components/athleticModal';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import athleticsData from '../components/portfolioData/athletics_data.json';
 
-const Portfolio = () => {
-    const [selectedCategory, setSelectedCategory] = useState('All');
-    const [selectedType, setSelectedType] = useState('All');
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [isModalVisible, setModalVisible] = useState(false);
+// Class Imports
+import AllClasses from '../components/portfolioData/allClasses';
+import englishClassesData from '../components/portfolioData/classes/english_classes.json';
+import businessClassesData from '../components/portfolioData/classes/business_classes.json';
 
-    const toggleModal = () => {
-        setModalVisible(!isModalVisible);
-    };
+const Portfolio = ({ route }) => {
+    console.log('English Classes Data:', englishClassesData);
+    console.log('Business Classes Data:', businessClassesData);
 
-    const renderCategory = (category) => {
-        return (
-            <TouchableOpacity onPress={() => handleCategoryClick(category)}>
-                <Text style={selectedCategory === category ? styles.activeCategory : styles.category}>{category}</Text>
-            </TouchableOpacity>
-        );
-    };
+    const allClasses = AllClasses();
+    const { category } = route.params || { category: { data: [] } };
+    const allData = [...allClasses, ...athleticsData];
 
-    const handleCategoryClick = (category) => {
-        setSelectedCategory(category);
-        setSelectedItem(null); // Reset selectedItem when a category is clicked
+    const [selectedTab, setSelectedTab] = useState('All');
+    const [innerTab, setInnerTab] = useState('All'); // State for inner tabs
 
-    };
+    const [filteredData, setFilteredData] = useState(category.data);
 
-    const closeModal = () => {
-        setModalVisible(false);
-    };
+    useEffect(() => {
+        filterData();
+    }, [selectedTab, innerTab, category]);
 
-    const renderType = (type) => {
-        return (
-            <TouchableOpacity onPress={() => setSelectedType(type)}>
-                <Text style={selectedType === type ? styles.activeCategory : styles.category}>{type}</Text>
-            </TouchableOpacity>
-        );
-    };
-
-    const getFilteredData = () => {
-        if (selectedCategory === 'All') {
-            return data.items;
+    const filterData = () => {
+        console.log('innerTab:', innerTab);
+        if (selectedTab === 'All') {
+            setFilteredData(allData);
+        } else if (selectedTab === 'Classes') {
+            const filtered = allClasses.filter(item => {
+                console.log('Item Label:', item.label); // Log the label of each item
+                console.log('Inner Tab:', innerTab);
+                return innerTab === 'All' ? true : item.label === innerTab;
+            });
+            console.log('Filtered Data:', filtered);
+            setFilteredData(filtered);
         } else {
-            const categoryData = data.items.filter(item => item.category === selectedCategory);
-
-            if (selectedType === 'All') {
-                return categoryData;
-            } else {
-                return categoryData.filter(item => item.type === selectedType);
-            }
+            const filtered = category.data.filter(item => item.label === selectedTab);
+            console.log('Filtered Data:', filtered);
+            setFilteredData(filtered);
         }
     };
 
-    const renderTypeButtons = () => {
-        if (selectedCategory !== 'All' && data.items.some(item => item.category === selectedCategory)) {
-            const uniqueTypes = [...new Set(data.items.filter(item => item.category === selectedCategory).map(item => item.type))];
+
+
+
+    const handleTabSelect = (tab) => {
+        setSelectedTab(tab);
+        setInnerTab('All');
+    };
+
+    const handleClassTypeSelect = (tab) => {
+        setInnerTab(tab);
+    }
+
+    const renderTabs = () => {
+        const tabs = ['All', 'Classes', 'Athletics'];
+
+        return tabs.map((type, index) => (
+            <TouchableOpacity
+                key={index.toString()}
+                onPress={() => handleTabSelect(type)}
+                style={{
+                    padding: 10,
+                    backgroundColor: selectedTab === type ? 'blue' : 'gray',
+                    borderRadius: 8,
+                    margin: 5,
+                }}
+            >
+                <Text style={{ color: 'white' }}>{type}</Text>
+            </TouchableOpacity>
+        ));
+    };
+
+    const renderClassType = () => {
+        if (selectedTab !== 'Classes') {
+            return null;
+        }
+
+        const classTypes = ['All', 'English', 'Business'];
+
+        return classTypes.map((type, index) => (
+            <TouchableOpacity
+                key={index.toString()}
+                onPress={() => handleClassTypeSelect(type)}
+                style={{
+                    padding: 10,
+                    backgroundColor: innerTab === type ? 'blue' : 'gray',
+                    borderRadius: 8,
+                    margin: 5,
+                }}
+            >
+                <Text style={{ color: 'white' }}>{type}</Text>
+            </TouchableOpacity>
+        ));
+    }
+
+    const renderClassItem = () => {
+        if (selectedTab !== 'Classes') {
+            return null;
+        } else if (innerTab === 'English') {
+
             return (
-                <View style={styles.types}>
-                    {renderType('All')}
-                    {uniqueTypes.map(type => renderType(type))}
-                </View>
+                <FlatList
+                    data={englishClassesData}
+                    renderItem={({ item }) => (
+                        <View style={{ padding: 20 }}>
+                            <Text>{item.label}</Text>
+                        </View>
+                    )}
+                    keyExtractor={item => item.id.toString()}
+                />
+            );
+        } else if (innerTab === 'Business') {
+            return (
+                <FlatList
+                    data={businessClassesData}
+                    renderItem={({ item }) => (
+                        <View style={{ padding: 20 }}>
+                            <Text>{item.label}</Text>
+                        </View>
+                    )}
+                    keyExtractor={item => item.id.toString()}
+                />
             );
         }
-        return null;
-    };
+    }
 
-    const renderItemModal = () => {
-        if (selectedItem && isModalVisible) {
-            console.log(selectedItem.category)
-            if (selectedCategory === 'All') {
-                if (selectedItem.category === 'Classes') {
-                    return <ClassesModal item={selectedItem} isVisible={isModalVisible} onClose={closeModal} />;
-                } else if (selectedItem.category === 'Athletics') {
-                    return <AthleticsModal item={selectedItem} isVisible={isModalVisible} onClose={closeModal} />;
-                }
-            } else if (selectedCategory === 'Classes') {
-                return <ClassesModal item={selectedItem} isVisible={isModalVisible} onClose={closeModal} />;
-            } else if (selectedCategory === 'Athletics') {
-                return <AthleticsModal item={selectedItem} isVisible={isModalVisible} onClose={closeModal} />;
-            }
-        }
-        return null;
-    };
-
+    const renderItem = ({ item }) => (
+        <View style={{ padding: 20 }}>
+            <Text>{item.label}</Text>
+        </View>
+    );
 
     return (
-        <View style={styles.container}>
-            <View style={styles.categories}>
-                {renderCategory('All')}
-                {renderCategory('Classes')}
-                {renderCategory('Athletics')}
+        <View style={{ flex: 1, padding: 20 }}>
+            <View style={{ flexDirection: 'row', marginBottom: 20 }}>
+                {renderTabs()}
             </View>
 
-            {renderTypeButtons()}
-
-            <FlatList
-                data={getFilteredData()}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <TouchableOpacity onPress={() => { setSelectedItem(item); toggleModal(); }}>
-                        <View style={styles.item}>
-                            <Text>{item.name}</Text>
-                        </View>
-                    </TouchableOpacity>
-                )}
-            />
-
-            {renderItemModal()}
+            <View style={{ flexDirection: 'row' }}>
+                {renderClassType()}
+                {renderClassItem()}
+                <FlatList
+                    data={filteredData}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id.toString()}  // Convert to string
+                />
+            </View>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 24,
-    },
-    categories: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 12,
-    },
-    types: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 12,
-    },
-    category: {
-        fontSize: 16,
-        color: 'black',
-    },
-    activeCategory: {
-        fontSize: 16,
-        color: 'blue',
-    },
-    item: {
-        backgroundColor: 'lightgray',
-        padding: 20,
-        marginVertical: 3,
-    },
-});
 
 export default Portfolio;

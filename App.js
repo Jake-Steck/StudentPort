@@ -9,8 +9,11 @@ import Profile from './pages/profile'
 import ForgotPassword from './pages/forgotPassword'
 import CreateAccount from './pages/createAccount';
 import Portfolio from './pages/portfolio';
+import classesData from './components/portfolioData/classes_data.json';
+import athleticsData from './components/portfolioData/athletics_data.json';
 
 const Stack = createNativeStackNavigator();
+const allData = [...classesData, ...athleticsData];
 
 export default function App() {
 
@@ -27,7 +30,12 @@ export default function App() {
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="CreateAccount" component={CreateAccount} />
-        <Stack.Screen name="Portfolio" component={Portfolio} />
+        <Stack.Screen
+          name="Portfolio"
+          component={Portfolio}
+          initialParams={{ category: { data: allData } }}
+
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
