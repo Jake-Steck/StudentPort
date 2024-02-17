@@ -1,10 +1,12 @@
 [
     {
         "id": "201",
-        "label": "Business 101"
+        "label": "Business 101",
+        "type": "Class"
     },
     {
         "id": "202",
-        "label": "Business 202"
+        "label": "Business 202",
+        "type": "Class"
     }
 ]

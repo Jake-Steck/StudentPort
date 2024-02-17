@@ -1,10 +1,12 @@
 [
     {
         "id": "101",
-        "label": "English 101"
+        "label": "English 101",
+        "type": "Class"
     },
     {
         "id": "102",
-        "label": "English 102"
+        "label": "English 102",
+        "type": "Class"
     }
 ]
