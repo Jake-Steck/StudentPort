@@ -1,10 +1,10 @@
 // ios: 459354272716-e4v89j84g5af8h0jrspk1ohmup7uoigu.apps.googleusercontent.com
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig.js";
+import { auth } from '../firebaseConfig';
 import { useState } from 'react';
 
 import GoogleSignIn from '../components/googleSignIn';
@@ -16,14 +16,20 @@ export default function SignIn({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    useEffect(() => {
+        setEmail("");
+        setPassword("");
+    }, []);
+
+
     let signIn = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
                 console.log(user.displayName);
+                console.log(user.uid);
                 navigation.navigate('Profile', { userInfo: user.displayName })
-                // ...
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -149,6 +155,7 @@ export default function SignIn({ navigation }) {
                 onChangeText={text => setEmail(text)}
                 style={styles.input}
                 placeholder="Email"
+
             />
             <TextInput
                 onChangeText={text => setPassword(text)}
@@ -284,5 +291,3 @@ const GoogleButton = (props) => {
         <GoogleSignIn />
     );
 }
-
-// Sign in with facebook button

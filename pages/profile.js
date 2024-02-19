@@ -3,10 +3,21 @@ import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_400Regular } from '@expo-google-fonts/poppins';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { signOut } from "firebase/auth";
+import { auth } from '../firebaseConfig';
 
 export default function Profile({ route }) {
     const { userInfo } = route.params;
     const navigation = useNavigation();
+
+    const SignOut = () => {
+        signOut(auth).then(() => {
+            console.log('Signed Out');
+            navigation.replace('SignIn');
+        }).catch((error) => {
+            console.error('Sign Out Error', error);
+        });
+    }
 
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
@@ -32,6 +43,10 @@ export default function Profile({ route }) {
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Portfolio')}>
                 <Text style={styles.buttonText}>Portfolio**Delete When Done</Text>
+                <AntDesign name="right" size={15} color="black" style={styles.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => SignOut()}>
+                <Text style={styles.buttonText}>Sign Out</Text>
                 <AntDesign name="right" size={15} color="black" style={styles.icon} />
             </TouchableOpacity>
         </View>

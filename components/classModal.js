@@ -1,8 +1,13 @@
 // ClassModal.js
 import React from 'react';
 import { View, Text, Modal, Button, StyleSheet } from 'react-native';
+import { db } from '../firebaseConfig';
+
 
 const ClassModal = ({ isVisible, onClose }) => {
+
+
+
     return (
         <Modal
             animationType="slide"

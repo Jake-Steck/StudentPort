@@ -30,6 +30,8 @@ const Portfolio = ({ route }) => {
     const [classModalVisible, setClassModalVisible] = useState(false);
     const [athleticModalVisible, setAthleticModalVisible] = useState(false);
 
+
+
     useEffect(() => {
         filterData();
     }, [selectedTab, innerTab, category]);
@@ -158,6 +160,13 @@ const Portfolio = ({ route }) => {
             </View>
         </TouchableOpacity>
     );
+
+    const addToPortfolio = (item) => {
+        const user = auth.currentUser;
+        const uid = user.uid;
+        const ref = database.ref(`users/${uid}/portfolio`);
+        ref.push(item);
+    };
 
     return (
         <View style={styles.container}>
