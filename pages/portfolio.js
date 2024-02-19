@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Modal } from 'react-native';
 
+// User Imports
+import { auth, database } from '../firebaseConfig';
+
 // Data Imports
 import athleticsData from '../components/portfolioData/athletics_data.json';
 
