@@ -163,7 +163,7 @@ export default function SignIn({ navigation }) {
                 placeholder='Password'
                 secureTextEntry={true}
             />
-            <Text style={styles.tiny} onPress={() => navigation.navigate('ForgotPassword')}>Forgot your password?</Text>
+            <Text style={styles.tiny} onPress={() => navigation.replace('ForgotPassword')}>Forgot your password?</Text>
             <View style={styles.buttonContainer}>
                 <Button
                     // Signin button
@@ -179,7 +179,7 @@ export default function SignIn({ navigation }) {
                 <GoogleButton />
                 <View style={styles.spacer} />
             </View>
-            <Text style={styles.tiny2} onPress={() => navigation.navigate('CreateAccount')}>Need an account? Register</Text>
+            <Text style={styles.tiny2} onPress={() => navigation.replace('CreateAccount')}>Need an account? Register</Text>
         </View>
     );
 }

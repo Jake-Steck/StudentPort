@@ -1,9 +1,10 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig.js";
+import { auth, db } from "../firebaseConfig.js";
+import { collection, addDoc } from "firebase/firestore";
 import { useState } from 'react';
 
 const img = 'https://assets.api.uizard.io/api/cdn/stream/28695123-53b2-493d-941a-ff98edcbefdf.png';
@@ -15,6 +16,21 @@ export default function CreateAccount({ navigation }) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
 
+    useEffect(() => {
+        setEmail("");
+        setPassword("");
+        setFirstName("");
+        setLastName("");
+    }, []);
+
+    let createUser = async (email, name) => {
+        const docRef = await addDoc(collection(db, "users"), {
+            email: email,
+            name: name,
+        });
+        console.log("Document written with ID: ", docRef.id);
+    }
+
     let signUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -24,6 +40,8 @@ export default function CreateAccount({ navigation }) {
                 updateProfile(auth.currentUser, {
                     displayName: `${firstName} ${lastName}`,
                 }).then(() => {
+                    console.log("Profile updated");
+                    createUser(email, auth.currentUser.displayName);
                     navigation.navigate('Profile', { userInfo: auth.currentUser.displayName });
                 }).catch((error) => {
                     console.error("Error updating profile: ", error);

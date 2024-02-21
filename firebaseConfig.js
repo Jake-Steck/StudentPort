@@ -21,25 +21,7 @@ const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
 });
+
 const db = getFirestore(app);
 
-const createUserDocument = async (user) => {
-  if (!user) return;
-
-  const userRef = db.doc(`users/${user.uid}`);
-  const snapshot = await userRef.get();
-
-  if (!snapshot.exists) {
-    const { email, displayName } = user;
-    try {
-      await userRef.set({
-        displayName,
-        email,
-      });
-    } catch (error) {
-      console.error("Error creating user document", error);
-    }
-  }
-}
-
-export { auth, db, app, createUserDocument };
+export { auth, db, app };
