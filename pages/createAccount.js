@@ -24,11 +24,21 @@ export default function CreateAccount({ navigation }) {
     }, []);
 
     let createUser = async (email, name) => {
-        const docRef = await addDoc(collection(db, "users"), {
+        const ref = collection(db, "users");
+        const userRef = await addDoc(ref, {
             email: email,
             name: name,
         });
-        console.log("Document written with ID: ", docRef.id);
+        const createSubCollection = collection(userRef, "portfolio");
+        await addDoc(createSubCollection, {
+            classes: [],
+            athletics: [],
+            achievements: [],
+            service: [],
+            clubs: [],
+            other: [],
+        });
+        console.log("Document written with ID: ", userRef.id);
     }
 
     let signUp = () => {
