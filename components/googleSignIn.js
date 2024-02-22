@@ -4,7 +4,8 @@ import * as Google from 'expo-auth-session/providers/google';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
-import { auth } from "../firebaseConfig.js";
+import { addDoc, collection, setDoc, getDocs, query, where } from 'firebase/firestore';
+import { auth, db } from "../firebaseConfig.js";
 
 
 export default function GoogleSignInButton() {
@@ -25,6 +26,26 @@ export default function GoogleSignInButton() {
         console.log(JSON.stringify(userInfo));
     }, [userInfo]);
 
+    let createUser = async (email, name) => {
+        const docRef = await addDoc(collection(db, "users"), {
+            email: email,
+            name: name,
+        });
+        console.log("Document written with ID: ", docRef.id);
+    }
+
+    let checkUser = async (email) => {
+        const usersRef = collection(db, "users");
+        const querySnapshot = await getDocs(query(usersRef, where("email", "==", email)));
+
+        if (!querySnapshot.empty) {
+            console.log("User exists:", querySnapshot.docs[0].data());
+        } else {
+            console.log("No such document!");
+            createUser(email, auth.currentUser.displayName);
+        }
+    }
+
 
     async function handleGoogleSignIn(response) {
         if (response?.type === 'success') {
@@ -33,6 +54,7 @@ export default function GoogleSignInButton() {
             try {
                 const credential = GoogleAuthProvider.credential(id_token);
                 const authResult = await signInWithCredential(auth, credential);
+                checkUser(authResult.user.email);
 
                 navigation.navigate('Profile', { userInfo: authResult.user.displayName });
 
