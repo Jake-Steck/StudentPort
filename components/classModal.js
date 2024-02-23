@@ -16,7 +16,6 @@ const ClassModal = ({ isVisible, onClose }) => {
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
                     <Text>Class Modal Content</Text>
-                    <Button title="Add" onPress={console.log("Added")} />
                     <Button title="Close" onPress={onClose} />
                 </View>
             </View>

@@ -13,7 +13,6 @@ const AthleticModal = ({ isVisible, onClose }) => {
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
                     <Text>Athletic Modal Content</Text>
-                    {/* Add more details as needed */}
                     <Button title="Close" onPress={onClose} />
                 </View>
             </View>
