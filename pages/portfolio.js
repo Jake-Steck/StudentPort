@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, FlatList, StyleSheet, Modal } from 'react
 
 // User Imports
 import { auth, database } from '../firebaseConfig';
+import { FirestoreData } from '../components/firestoreData';
 
 // Data Imports
 import athleticsData from '../components/portfolioData/athletics_data.json';
@@ -52,13 +53,16 @@ const Portfolio = ({ route }) => {
         }
     };
 
+
+
     const handleItemPress = (item) => {
-        if (item.type === "Class") {
+        FirestoreData({ item });
+        if (item.type === 'Class') {
             setClassModalVisible(true);
-        } else if (item.type === 'Sport') {
+        } else if (item.type === 'Athletic') {
             setAthleticModalVisible(true);
         }
-    };
+    }
 
     const handleModalClose = () => {
         setClassModalVisible(false);

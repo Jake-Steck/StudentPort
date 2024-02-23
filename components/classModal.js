@@ -2,12 +2,10 @@
 import React from 'react';
 import { View, Text, Modal, Button, StyleSheet } from 'react-native';
 import { db } from '../firebaseConfig';
+import { collection, addDoc } from 'firebase/firestore';
 
 
 const ClassModal = ({ isVisible, onClose }) => {
-
-
-
     return (
         <Modal
             animationType="slide"
