@@ -8,6 +8,7 @@ import SignIn from './pages/signIn'
 import Profile from './pages/profile'
 import ForgotPassword from './pages/forgotPassword'
 import CreateAccount from './pages/createAccount';
+import Classes from './pages/classes';
 import Portfolio from './pages/portfolio';
 import classesData from './components/portfolioData/classes_data.json';
 import athleticsData from './components/portfolioData/athletics_data.json';
@@ -36,6 +37,7 @@ export default function App() {
           initialParams={{ category: { data: allData } }}
 
         />
+        <Stack.Screen name="Classes" component={Classes} />
       </Stack.Navigator>
     </NavigationContainer>
   );
