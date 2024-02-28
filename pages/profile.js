@@ -41,6 +41,10 @@ export default function Profile({ route }) {
                 <Text style={styles.buttonText}>Classes</Text>
                 <AntDesign name="right" size={15} color="black" style={styles.icon} />
             </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sports')}>
+                <Text style={styles.buttonText}>Athletics</Text>
+                <AntDesign name="right" size={15} color="black" style={styles.icon} />
+            </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Portfolio')}>
                 <Text style={styles.buttonText}>Portfolio**Delete When Done</Text>
                 <AntDesign name="right" size={15} color="black" style={styles.icon} />

@@ -9,6 +9,7 @@ import Profile from './pages/profile'
 import ForgotPassword from './pages/forgotPassword'
 import CreateAccount from './pages/createAccount';
 import Classes from './pages/classes';
+import Sports from './pages/sports';
 import Portfolio from './pages/portfolio';
 import classesData from './components/portfolioData/classes_data.json';
 import athleticsData from './components/portfolioData/athletics_data.json';
