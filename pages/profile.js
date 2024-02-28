@@ -37,7 +37,7 @@ export default function Profile({ route }) {
                     <Text style={styles.subText}>School</Text>
                 </View>
             </View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Classes')}>
                 <Text style={styles.buttonText}>Classes</Text>
                 <AntDesign name="right" size={15} color="black" style={styles.icon} />
             </TouchableOpacity>
