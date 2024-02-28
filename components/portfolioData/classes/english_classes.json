@@ -2,41 +2,41 @@
     {
         "id": "e1",
         "label": "English 1",
-        "type": "Class"
+        "type": "Classes"
     },
     {
         "id": "e2",
         "label": "English 2",
-        "type": "Class"
+        "type": "Classes"
     },
     {
         "id": "e3",
         "label": "English 3",
-        "type": "Class"
+        "type": "Classes"
     },
     {
         "id": "e4",
         "label": "English 4",
-        "type": "Class"
+        "type": "Classes"
     },
     {
         "id": "h1",
         "label": "Humanities 1",
-        "type": "Class"
+        "type": "Classes"
     },
     {
         "id": "h2",
         "label": "Humanities 2",
-        "type": "Class"
+        "type": "Classes"
     },
     {
         "id": "h3",
         "label": "Humanities 3",
-        "type": "Class"
+        "type": "Classes"
     },
     {
         "id": "h4",
         "label": "Humanities 4",
-        "type": "Class"
+        "type": "Classes"
     }
 ]

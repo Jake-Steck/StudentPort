@@ -2,11 +2,11 @@
     {
         "id": "201",
         "label": "Business 101",
-        "type": "Class"
+        "type": "Classes"
     },
     {
         "id": "202",
         "label": "Business 202",
-        "type": "Class"
+        "type": "Classes"
     }
 ]

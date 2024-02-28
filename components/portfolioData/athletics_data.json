@@ -2,11 +2,11 @@
     {
         "id": "a1",
         "label": "Athletic Event 1",
-        "type": "Sport"
+        "type": "Athletics"
     },
     {
         "id": "a2",
         "label": "Athletic Event 2",
-        "type": "Sport"
+        "type": "Athletics"
     }
 ]
