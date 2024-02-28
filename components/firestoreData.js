@@ -67,9 +67,28 @@ const addToPortfolio = async (item) => {
     }
 }
 
-export const FirestoreData = async ({ item }) => {
-    console.log("Item:", item);
-    const userId = await getUser();
-    await getUserPortfolioID();
-    await addToPortfolio(item);
+const getClasses = async (userId) => {
+    try {
+        const portfolioID = await getUserPortfolioID(userId);
+        const portfolioDoc = await getDoc(doc(db, `users/${userId}/portfolio/${portfolioID}`));
+
+        if (portfolioDoc.exists()) {
+            const portfolioData = portfolioDoc.data();
+            const classes = portfolioData ? portfolioData.classes || [] : [];
+            return classes;
+        } else {
+            console.log("No portfolio document found!");
+            return [];
+        }
+    } catch (e) {
+        console.error("Error fetching classes:", e);
+        return [];
+    }
+}
+
+export const FirestoreData = {
+    getUser,
+    getUserPortfolioID,
+    addToPortfolio,
+    getClasses,
 };
