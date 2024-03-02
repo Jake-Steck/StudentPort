@@ -29,9 +29,8 @@ const Portfolio = ({ route }) => {
 
     const [filteredData, setFilteredData] = useState(category.data);
 
-    const [classModalVisible, setClassModalVisible] = useState(false);
-    const [athleticModalVisible, setAthleticModalVisible] = useState(false);
-
+    const [classModalVisible, setClassModalVisible] = useState({ visible: false, item: null });
+    const [athleticModalVisible, setAthleticModalVisible] = useState({ visible: false, item: null });
 
 
     useEffect(() => {
@@ -57,17 +56,17 @@ const Portfolio = ({ route }) => {
 
 
     const handleItemPress = (item) => {
-        addToPortfolio(item);
-        if (item.type === 'Class') {
-            setClassModalVisible(true);
-        } else if (item.type === 'Athletic') {
-            setAthleticModalVisible(true);
+        console.log('Item Pressed:', item);
+        if (item.type === 'Classes') {
+            setClassModalVisible({ visible: true, item: item.label });
+        } else if (item.type === 'Athletics') {
+            setAthleticModalVisible({ visible: true, item: item.label });
         }
     }
 
     const handleModalClose = () => {
-        setClassModalVisible(false);
-        setAthleticModalVisible(false);
+        setClassModalVisible({ visible: false, item: null });
+        setAthleticModalVisible({ visible: false, item: null });
     };
 
     const handleTabSelect = (tab) => {
@@ -185,8 +184,8 @@ const Portfolio = ({ route }) => {
                 keyExtractor={item => item.id.toString()}
             />
 
-            <ClassModal isVisible={classModalVisible} onClose={handleModalClose} />
-            <AthleticModal isVisible={athleticModalVisible} onClose={handleModalClose} />
+            <ClassModal isVisible={classModalVisible.visible} onClose={handleModalClose} item={classModalVisible.item} />
+            <AthleticModal isVisible={athleticModalVisible.visible} onClose={handleModalClose} item={athleticModalVisible.item} />
         </View>
     );
 }

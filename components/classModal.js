@@ -3,9 +3,13 @@ import React from 'react';
 import { View, Text, Modal, Button, StyleSheet } from 'react-native';
 import { db } from '../firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
+import { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio } from './firestoreData';
+import { useEffect } from 'react';
 
+const ClassModal = ({ isVisible, onClose, item }) => {
 
-const ClassModal = ({ isVisible, onClose }) => {
+    console.log('Item:', item);
+
     return (
         <Modal
             animationType="slide"
@@ -17,6 +21,7 @@ const ClassModal = ({ isVisible, onClose }) => {
                 <View style={styles.modalContent}>
                     <Text>Class Modal Content</Text>
                     <Button title="Close" onPress={onClose} />
+                    <Button title="Add to Portfolio" onPress={() => addToPortfolio(item, "classes")} />
                 </View>
             </View>
         </Modal>

@@ -1,8 +1,10 @@
 // AthleticModal.js
 import React from 'react';
 import { View, Text, Modal, Button, StyleSheet } from 'react-native';
+import { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio } from './firestoreData';
 
-const AthleticModal = ({ isVisible, onClose }) => {
+
+const AthleticModal = ({ isVisible, onClose, item }) => {
     return (
         <Modal
             animationType="slide"
@@ -14,6 +16,7 @@ const AthleticModal = ({ isVisible, onClose }) => {
                 <View style={styles.modalContent}>
                     <Text>Athletic Modal Content</Text>
                     <Button title="Close" onPress={onClose} />
+                    <Button title="Add to Portfolio" onPress={() => addToPortfolio(item, "athletics")} />
                 </View>
             </View>
         </Modal>
