@@ -39,6 +39,7 @@ export default function App() {
 
         />
         <Stack.Screen name="Classes" component={Classes} />
+        <Stack.Screen name="Sports" component={Sports} />
       </Stack.Navigator>
     </NavigationContainer>
   );

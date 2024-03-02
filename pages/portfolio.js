@@ -3,7 +3,8 @@ import { View, Text, TouchableOpacity, FlatList, StyleSheet, Modal } from 'react
 
 // User Imports
 import { auth, database } from '../firebaseConfig';
-import { FirestoreData } from '../components/firestoreData';
+import { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports } from '../components/firestoreData';
+
 
 // Data Imports
 import athleticsData from '../components/portfolioData/athletics_data.json';
@@ -56,7 +57,7 @@ const Portfolio = ({ route }) => {
 
 
     const handleItemPress = (item) => {
-        FirestoreData({ item });
+        addToPortfolio(item);
         if (item.type === 'Class') {
             setClassModalVisible(true);
         } else if (item.type === 'Athletic') {
@@ -165,12 +166,6 @@ const Portfolio = ({ route }) => {
         </TouchableOpacity>
     );
 
-    const addToPortfolio = (item) => {
-        const user = auth.currentUser;
-        const uid = user.uid;
-        const ref = database.ref(`users/${uid}/portfolio`);
-        ref.push(item);
-    };
 
     return (
         <View style={styles.container}>

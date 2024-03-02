@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
-import { FirestoreData } from '../components/firestoreData';
+import { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports } from '../components/firestoreData';
 
 export default function Classes() {
     const [fontsLoaded] = useFonts({
@@ -16,8 +16,8 @@ export default function Classes() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userId = await FirestoreData.getUser();
-                const response = await FirestoreData.getClasses(userId);
+                const userId = await getUser();
+                const response = await getClasses(userId);
                 setClasses(response);
 
             } catch (error) {
