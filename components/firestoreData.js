@@ -1,5 +1,5 @@
 import { db, auth } from '../firebaseConfig';
-import { collection, addDoc, where, query, getDocs, getDoc, doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { collection, addDoc, where, query, getDocs, getDoc, doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 
 const handleItemType = (item) => {
     return item.type.toLowerCase();
@@ -67,6 +67,20 @@ const addToPortfolio = async (item) => {
     }
 }
 
+const removeFromPortfolio = async (item, type) => {
+    const uid = await getUser(); // Use await to get the user ID
+    const portfolioID = await getUserPortfolioID(); // Use await to get the portfolio ID
+
+    if (portfolioID) {
+        const portfolioDocRef = doc(db, `users/${uid}/portfolio/${portfolioID}`);
+        await updateDoc(portfolioDocRef, {
+            [type]: arrayRemove(item)
+        });
+    } else {
+        console.log("Portfolio ID not found.");
+    }
+}
+
 const getClasses = async (userId) => {
     try {
         const portfolioID = await getUserPortfolioID(userId);
@@ -105,4 +119,4 @@ const getSports = async (userId) => {
     }
 }
 
-export { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports };
+export { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio };

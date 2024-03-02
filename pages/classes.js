@@ -1,9 +1,9 @@
 // Inside classes.js
 
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
-import { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports } from '../components/firestoreData';
+import { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio } from '../components/firestoreData';
 
 export default function Classes() {
     const [fontsLoaded] = useFonts({
@@ -12,6 +12,8 @@ export default function Classes() {
         Poppins_600SemiBold,
     });
     const [classes, setClasses] = useState([]);
+    const [itemClicked, setItemClicked] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,17 +28,24 @@ export default function Classes() {
         };
         fetchData();
 
-    }, []);
+    }, [itemClicked]);
 
     if (!fontsLoaded) {
         return <Text>Loading...</Text>; // or any loading indicator
+    }
+
+    const handleRemove = (item) => {
+        removeFromPortfolio(item, "classes");
+        setItemClicked(!itemClicked);
     }
 
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Classes</Text>
             {classes.map((item, index) => (
-                <Text key={index}>{item}</Text>
+                <TouchableOpacity key={index} onPress={() => handleRemove(item)}>
+                    <Text key={index}>{item}</Text>
+                </TouchableOpacity>
             ))}
         </View>
     );
