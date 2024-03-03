@@ -1,66 +1,116 @@
-// Inside classes.js
-
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
-import { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio } from '../components/firestoreData';
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { removeFromPortfolio, getClasses, getUser } from '../components/firestoreData';
+import { useFonts, Poppins_700Bold, Poppins_600SemiBold, Poppins_400Regular } from '@expo-google-fonts/poppins';
 
 export default function Classes() {
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
-        Poppins_300Light,
+        Poppins_400Regular,
         Poppins_600SemiBold,
     });
+
     const [classes, setClasses] = useState([]);
     const [itemClicked, setItemClicked] = useState(false);
-
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userId = await getUser();
-                const response = await getClasses(userId);
+                const user = await getUser();
+                const response = await getClasses(user);
+                console.log('Classes:', response);
                 setClasses(response);
 
             } catch (error) {
                 console.error('Error fetching classes:', error);
             }
         };
+
         fetchData();
-
     }, [itemClicked]);
-
-    if (!fontsLoaded) {
-        return <Text>Loading...</Text>; // or any loading indicator
-    }
 
     const handleRemove = (item) => {
         removeFromPortfolio(item, "classes");
         setItemClicked(!itemClicked);
     }
 
+    if (!fontsLoaded) {
+        return <Text>Loading...</Text>; // or any loading indicator
+    }
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Classes</Text>
-            {classes.map((item, index) => (
-                <TouchableOpacity key={index} onPress={() => handleRemove(item)}>
-                    <Text key={index}>{item}</Text>
-                </TouchableOpacity>
-            ))}
-        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollViewContent}>
+            <View style={styles.container}>
+                {classes.map((item, index) => (
+                    <React.Fragment key={index}>
+                        <ClassCard className={item} />
+                        {index !== classes.length - 1}
+                    </React.Fragment>
+                ))}
+            </View>
+        </ScrollView>
+    );
+}
+
+export function ClassCard({ className, onRemove }) {
+    return (
+        <TouchableOpacity onPress={onRemove} style={styles.classContainer}>
+            <View style={styles.classImage}>
+                <View style={styles.classIconBox}>
+                    <Ionicons name="school" size={20} color="black" />
+                </View>
+            </View>
+            <Text style={styles.classText}>{className}</Text>
+        </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#f7f7f7',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
     },
-    text: {
-        fontFamily: 'Poppins_600SemiBold',
-        fontSize: 25,
-        justifyContent: "center",
+    classText: {
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 20,
+        textAlign: 'center',
+        color: 'black',
+        top: 60,
+        right: 200
+    },
+    classContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 20,
+        marginLeft: 30,
+        backgroundColor: 'lightgray',
+        width: 260,
+        height: 180,
+        borderRadius: 20,
+    },
+    classImage: {
+        width: 210,
+        height: 100,
+        borderRadius: 20,
+        marginLeft: 10,
+        top: -30,
+        backgroundColor: '#0e0e0e',
+    },
+    classIconBox: {
+        width: 40,
+        height: 40,
+        borderRadius: 12,
+        backgroundColor: 'white',
+        left: 160,
+        top: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    scrollViewContent: {
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });
