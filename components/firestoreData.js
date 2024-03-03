@@ -119,4 +119,61 @@ const getSports = async (userId) => {
     }
 }
 
-export { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio };
+const getClubs = async (userId) => {
+    try {
+        const portfolioID = await getUserPortfolioID(userId);
+        const portfolioDoc = await getDoc(doc(db, `users/${userId}/portfolio/${portfolioID}`));
+
+        if (portfolioDoc.exists()) {
+            const portfolioData = portfolioDoc.data();
+            const clubs = portfolioData ? portfolioData.clubs || [] : [];
+            return clubs;
+        } else {
+            console.log("No portfolio document found!");
+            return [];
+        }
+    } catch (e) {
+        console.error("Error fetching clubs:", e);
+        return [];
+    }
+}
+
+const getService = async (userId) => {
+    try {
+        const portfolioID = await getUserPortfolioID(userId);
+        const portfolioDoc = await getDoc(doc(db, `users/${userId}/portfolio/${portfolioID}`));
+
+        if (portfolioDoc.exists()) {
+            const portfolioData = portfolioDoc.data();
+            const service = portfolioData ? portfolioData.service || [] : [];
+            return service;
+        } else {
+            console.log("No portfolio document found!");
+            return [];
+        }
+    } catch (e) {
+        console.error("Error fetching service:", e);
+        return [];
+    }
+}
+
+const getOther = async (userId) => {
+    try {
+        const portfolioID = await getUserPortfolioID(userId);
+        const portfolioDoc = await getDoc(doc(db, `users/${userId}/portfolio/${portfolioID}`));
+
+        if (portfolioDoc.exists()) {
+            const portfolioData = portfolioDoc.data();
+            const other = portfolioData ? portfolioData.other || [] : [];
+            return other;
+        } else {
+            console.log("No portfolio document found!");
+            return [];
+        }
+    } catch (e) {
+        console.error("Error fetching other:", e);
+        return [];
+    }
+}
+
+export { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio, getClubs, getService, getOther };

@@ -10,6 +10,9 @@ import ForgotPassword from './pages/forgotPassword'
 import CreateAccount from './pages/createAccount';
 import Classes from './pages/classes';
 import Sports from './pages/sports';
+import Clubs from './pages/clubs';
+import Service from './pages/service';
+import Other from './pages/other';
 import Portfolio from './pages/portfolio';
 import classesData from './components/portfolioData/classes_data.json';
 import athleticsData from './components/portfolioData/athletics_data.json';
@@ -40,6 +43,9 @@ export default function App() {
         />
         <Stack.Screen name="Classes" component={Classes} />
         <Stack.Screen name="Sports" component={Sports} />
+        <Stack.Screen name="Clubs" component={Clubs} />
+        <Stack.Screen name="Service" component={Service} />
+        <Stack.Screen name="Other" component={Other} />
       </Stack.Navigator>
     </NavigationContainer>
   );
