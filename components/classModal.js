@@ -1,14 +1,14 @@
-// ClassModal.js
-import React from 'react';
-import { View, Text, Modal, Button, StyleSheet } from 'react-native';
-import { db } from '../firebaseConfig';
-import { collection, addDoc } from 'firebase/firestore';
-import { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio } from './firestoreData';
-import { useEffect } from 'react';
+import React, { useState } from 'react';
+import { View, Text, Modal, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { addToPortfolio } from './firestoreData';
 
 const ClassModal = ({ isVisible, onClose, item }) => {
+    const [selectedLevel, setSelectedLevel] = useState('');
 
-    console.log('Item:', item);
+    const handleAddToPortfolio = () => {
+        addToPortfolio(item, "classes", selectedLevel);
+        onClose();
+    };
 
     return (
         <Modal
@@ -19,9 +19,36 @@ const ClassModal = ({ isVisible, onClose, item }) => {
         >
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
-                    <Text>Class Modal Content</Text>
-                    <Button title="Close" onPress={onClose} />
-                    <Button title="Add to Portfolio" onPress={() => addToPortfolio(item, "classes")} />
+                    <Text>{item}</Text>
+                    <Text>Please select the class level:</Text>
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity
+                            style={[styles.button, selectedLevel === 'Regular/CP' && styles.selectedButton]}
+                            onPress={() => setSelectedLevel('Regular/CP')}
+                        >
+                            <Text>Regular/CP</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.button, selectedLevel === 'Honors/Accelerated' && styles.selectedButton]}
+                            onPress={() => setSelectedLevel('Honors/Accelerated')}
+                        >
+                            <Text>Honors/Accelerated</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.bottomContainer}>
+                        <TouchableOpacity
+                            style={[styles.button, styles.addToPortfolioButton]}
+                            onPress={handleAddToPortfolio}
+                        >
+                            <Text style={{ color: 'white' }}>Add to Portfolio</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.button, styles.closeButton]}
+                            onPress={onClose}
+                        >
+                            <Text style={{ color: 'white' }}>Close</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </Modal>
@@ -39,6 +66,34 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 10,
         elevation: 5,
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
+    },
+    button: {
+        padding: 15,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: 'gray',
+        marginHorizontal: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    bottomContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
+    },
+    closeButton: {
+        backgroundColor: 'tomato',
+    },
+    addToPortfolioButton: {
+        backgroundColor: 'mediumseagreen',
+    },
+    selectedButton: {
+        backgroundColor: 'lightblue',
     },
 });
 
