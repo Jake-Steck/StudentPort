@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Modal } from 'react-native';
+import { useFonts, Poppins_700Bold, Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 
 // User Imports
 import { auth, database } from '../firebaseConfig';
@@ -20,6 +21,12 @@ import AthleticModal from '../components/athleticModal';
 
 const Portfolio = ({ route }) => {
 
+    const [fontsLoaded] = useFonts({
+        Poppins_700Bold,
+        Poppins_400Regular,
+        Poppins_600SemiBold,
+    });
+
     const allClasses = AllClasses();
     const { category } = route.params || { category: { data: [] } };
     const allData = [...allClasses, ...athleticsData];
@@ -36,6 +43,8 @@ const Portfolio = ({ route }) => {
     useEffect(() => {
         filterData();
     }, [selectedTab, innerTab, category]);
+
+
 
     const filterData = () => {
         if (selectedTab === 'All') {
@@ -85,14 +94,9 @@ const Portfolio = ({ route }) => {
             <TouchableOpacity
                 key={index.toString()}
                 onPress={() => handleTabSelect(type)}
-                style={{
-                    padding: 10,
-                    backgroundColor: selectedTab === type ? 'blue' : 'gray',
-                    borderRadius: 8,
-                    margin: 5,
-                }}
+                style={[styles.filterButton, selectedTab === type && styles.selectedFilter]}
             >
-                <Text style={{ color: 'white' }}>{type}</Text>
+                <Text style={styles.filterButtonText}>{type}</Text>
             </TouchableOpacity>
         ));
     };
@@ -108,14 +112,9 @@ const Portfolio = ({ route }) => {
             <TouchableOpacity
                 key={index.toString()}
                 onPress={() => handleClassTypeSelect(type)}
-                style={{
-                    padding: 10,
-                    backgroundColor: innerTab === type ? 'blue' : 'gray',
-                    borderRadius: 8,
-                    margin: 5,
-                }}
+                style={[styles.filterButton, innerTab === type && styles.selectedFilter]}
             >
-                <Text style={{ color: 'white' }}>{type}</Text>
+                <Text style={styles.filterButtonText}>{type}</Text>
             </TouchableOpacity>
         ));
     }
@@ -130,7 +129,7 @@ const Portfolio = ({ route }) => {
                             renderItem={({ item }) => (
                                 <View style={styles.filterData}>
                                     <TouchableOpacity onPress={() => handleItemPress(item)}>
-                                        <Text>{item.label}</Text>
+                                        <Text style={styles.filterDataText}>{item.label}</Text>
                                     </TouchableOpacity>
                                 </View>
                             )}
@@ -144,7 +143,7 @@ const Portfolio = ({ route }) => {
                             renderItem={({ item }) => (
                                 <View style={styles.filterData}>
                                     <TouchableOpacity onPress={() => handleItemPress(item)}>
-                                        <Text>{item.label}</Text>
+                                        <Text style={styles.filterDataText}>{item.label}</Text>
                                     </TouchableOpacity>
                                 </View>
                             )}
@@ -160,10 +159,14 @@ const Portfolio = ({ route }) => {
     const renderItem = ({ item }) => (
         <TouchableOpacity onPress={() => handleItemPress(item)}>
             <View style={styles.filterData}>
-                <Text>{item.label}</Text>
+                <Text style={styles.filterDataText}>{item.label}</Text>
             </View>
         </TouchableOpacity>
     );
+
+    if (!fontsLoaded) {
+        return <Text>Loading...</Text>;
+    }
 
 
     return (
@@ -195,23 +198,42 @@ export default Portfolio;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#f0f0f0',
+        padding: 15,
     },
     filterContainer: {
         flexDirection: 'row',
-        justifyContent: 'center', // Center the buttons horizontally
-        padding: 10,
+        justifyContent: 'space-around',
+        paddingVertical: 10,
         marginBottom: 20,
-        backgroundColor: 'lightgray',
+        backgroundColor: '#3498db',
+        borderRadius: 10,
     },
     filterButton: {
-        padding: 10,
-        backgroundColor: 'blue',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        backgroundColor: '#2980b9',
         borderRadius: 8,
-        margin: 5,
+        marginHorizontal: 5,
+    },
+    filterButtonText: {
+        color: '#ecf0f1',
+        fontFamily: 'Poppins_600SemiBold',
     },
     filterData: {
-        padding: 20,
-        backgroundColor: 'red',
-        margin: 10,
+        padding: 15,
+        borderRadius: 8,
+        borderWidth: 2,
+        marginVertical: 3,
+        borderColor: 'black',
     },
+    filterDataText: {
+        color: '#2c3e50',
+        fontSize: 16,
+        fontFamily: 'Poppins_400Regular',
+    },
+    selectedFilter: {
+        backgroundColor: '#1c5c85',
+    }
 });
+
