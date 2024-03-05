@@ -187,6 +187,7 @@ export default function Profile({ route }) {
                 <View style={styles.currGapEnd} />
             </ScrollView>
             <View style={styles.gap} />
+            <Text style={styles.headerText}>Achievements</Text>
         </View>
     );
 }

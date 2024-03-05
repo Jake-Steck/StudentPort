@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { removeFromPortfolio, getClasses, getUser } from '../components/firestoreData';
 import { useFonts, Poppins_700Bold, Poppins_600SemiBold, Poppins_400Regular } from '@expo-google-fonts/poppins';
 
@@ -44,7 +45,7 @@ export default function Classes() {
             <View style={styles.container}>
                 {classes.map((item, index) => (
                     <React.Fragment key={index}>
-                        <ClassCard className={item} />
+                        <ClassCard className={item} onRemove={() => handleRemove(item)} />
                         {index !== classes.length - 1}
                     </React.Fragment>
                 ))}
@@ -54,15 +55,20 @@ export default function Classes() {
 }
 
 export function ClassCard({ className, onRemove }) {
+
+
     return (
-        <TouchableOpacity onPress={onRemove} style={styles.classContainer}>
+        <View style={styles.classContainer}>
             <View style={styles.classImage}>
                 <View style={styles.classIconBox}>
                     <Ionicons name="school" size={20} color="black" />
                 </View>
             </View>
-            <Text style={styles.classText}>{className}</Text>
-        </TouchableOpacity>
+            <View style={styles.horizontal}>
+                <Text style={styles.classText}>{className}</Text>
+                <MaterialIcons style={styles.remove} name="highlight-remove" size={24} color="black" onPress={onRemove} />
+            </View>
+        </View>
     );
 }
 
@@ -108,9 +114,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
     scrollViewContent: {
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    horizontal: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    remove: {
+        top: 60,
+        right: 85,
     },
 });
