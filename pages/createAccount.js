@@ -36,6 +36,7 @@ export default function CreateAccount({ navigation }) {
             achievements: [],
             service: [],
             clubs: [],
+            testing: [],
             other: [],
         });
         console.log("Document written with ID: ", userRef.id);
