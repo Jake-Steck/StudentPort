@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, Modal, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { addToPortfolio } from './firestoreData';
 
-const AthleticModal = ({ isVisible, onClose, item }) => {
+const ClubModal = ({ isVisible, onClose, item }) => {
     const [selectedLevel, setSelectedLevel] = useState('');
 
     const handleAddToPortfolio = () => {
-        addToPortfolio(item, "athletics", selectedLevel);
+        addToPortfolio(item, "clubs", selectedLevel);
         onClose();
     };
 
@@ -23,22 +23,16 @@ const AthleticModal = ({ isVisible, onClose, item }) => {
                     <Text>Please select the class level:</Text>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity
-                            style={[styles.button, selectedLevel === 'Freshmen' && styles.selectedButton]}
-                            onPress={() => setSelectedLevel('Freshmen')}
+                            style={[styles.button, selectedLevel === 'Member' && styles.selectedButton]}
+                            onPress={() => setSelectedLevel('Member')}
                         >
-                            <Text>Freshmen</Text>
+                            <Text>Member</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={[styles.button, selectedLevel === 'Junior Varsity' && styles.selectedButton]}
-                            onPress={() => setSelectedLevel('Junior Varsity')}
+                            style={[styles.button, selectedLevel === 'Leadership' && styles.selectedButton]}
+                            onPress={() => setSelectedLevel('Leadership')}
                         >
-                            <Text>Junior Varsity</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={[styles.button, selectedLevel === 'Varsity' && styles.selectedButton]}
-                            onPress={() => setSelectedLevel('Varsity')}
-                        >
-                            <Text>Varsity</Text>
+                            <Text>Leadership</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.bottomContainer}>
@@ -103,4 +97,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AthleticModal;
+export default ClubModal;

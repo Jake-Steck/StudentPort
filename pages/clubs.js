@@ -34,7 +34,7 @@ export default function Clubs() {
     }
 
     const handleRemove = (item) => {
-        removeFromPortfolio(item, "athletics");
+        removeFromPortfolio(item, "clubs");
         setItemClicked(!itemClicked);
     }
 

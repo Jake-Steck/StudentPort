@@ -27,6 +27,7 @@ import {
 
 // Data Imports
 import athleticsData from '../components/portfolioData/athletics_data.json';
+import clubsData from '../components/portfolioData/clubs_data.json';
 
 // Class Imports
 import AllClasses from '../components/portfolioData/allClasses';
@@ -43,6 +44,7 @@ import artClassesData from '../components/portfolioData/classes/art_classes.json
 // Modal Imports
 import ClassModal from '../components/classModal';
 import AthleticModal from '../components/athleticModal';
+import ClubModal from '../components/clubModal';
 
 const Portfolio = ({ route }) => {
     const [fontsLoaded] = useFonts({
@@ -53,7 +55,7 @@ const Portfolio = ({ route }) => {
 
     const allClasses = AllClasses();
     const { category } = route.params || { category: { data: [] } };
-    const allData = [...allClasses, ...athleticsData];
+    const allData = [...allClasses, ...athleticsData, ...clubsData];
 
     const [selectedTab, setSelectedTab] = useState('All');
     const [innerTab, setInnerTab] = useState('All');
@@ -65,6 +67,11 @@ const Portfolio = ({ route }) => {
         item: null,
     });
     const [athleticModalVisible, setAthleticModalVisible] = useState({
+        visible: false,
+        item: null,
+    });
+
+    const [clubModalVisible, setClubModalVisible] = useState({
         visible: false,
         item: null,
     });
@@ -84,6 +91,8 @@ const Portfolio = ({ route }) => {
             setFilteredData(filtered);
         } else if (selectedTab === 'Athletics') {
             setFilteredData(athleticsData);
+        } else if (selectedTab === 'Clubs') {
+            setFilteredData(clubsData);
         } else {
             setFilteredData(category.data);
         }
@@ -95,12 +104,15 @@ const Portfolio = ({ route }) => {
             setClassModalVisible({ visible: true, item: item.label });
         } else if (item.type === 'Athletics') {
             setAthleticModalVisible({ visible: true, item: item.label });
+        } else if (item.type === 'Clubs') {
+            setClubModalVisible({ visible: true, item: item.label });
         }
     };
 
     const handleModalClose = () => {
         setClassModalVisible({ visible: false, item: null });
         setAthleticModalVisible({ visible: false, item: null });
+        setClubModalVisible({ visible: false, item: null });
     };
 
     const handleTabSelect = (tab) => {
@@ -113,7 +125,7 @@ const Portfolio = ({ route }) => {
     };
 
     const renderTabs = () => {
-        const tabs = ['All', 'Classes', 'Athletics'];
+        const tabs = ['All', 'Classes', 'Athletics', 'Clubs'];
 
         return tabs.map((type, index) => (
             <TouchableOpacity
@@ -373,6 +385,11 @@ const Portfolio = ({ route }) => {
                 isVisible={athleticModalVisible.visible}
                 onClose={handleModalClose}
                 item={athleticModalVisible.item}
+            />
+            <ClubModal
+                isVisible={clubModalVisible.visible}
+                onClose={handleModalClose}
+                item={clubModalVisible.item}
             />
         </View>
     );
