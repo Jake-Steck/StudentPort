@@ -1,0 +1,107 @@
+[
+    {
+        "id": "v1",
+        "label": "Animal shelter",
+        "type": "Service"
+    },
+    {
+        "id": "v2",
+        "label": "Park clean up",
+        "type": "Service"
+    },
+    {
+        "id": "v3",
+        "label": "Volunteer",
+        "type": "Service"
+    },
+    {
+        "id": "v4",
+        "label": "Homelessness",
+        "type": "Service"
+    },
+    {
+        "id": "v5",
+        "label": "Provide classroom supplies",
+        "type": "Service"
+    },
+    {
+        "id": "v6",
+        "label": "Sales",
+        "type": "Service"
+    },
+    {
+        "id": "v7",
+        "label": "Book donation",
+        "type": "Service"
+    },
+    {
+        "id": "v8",
+        "label": "Community",
+        "type": "Service"
+    },
+    {
+        "id": "v9",
+        "label": "Deliver food for meals on wheels",
+        "type": "Service"
+    },
+    {
+        "id": "v10",
+        "label": "Distribute food to homeless shelters",
+        "type": "Service"
+    },
+    {
+        "id": "v11",
+        "label": "Donate your old clothes",
+        "type": "Service"
+    },
+    {
+        "id": "v12",
+        "label": "Find remote volunteer opportunities",
+        "type": "Service"
+    },
+    {
+        "id": "v13",
+        "label": "Help train service dogs",
+        "type": "Service"
+    },
+    {
+        "id": "v14",
+        "label": "Lawn mowing",
+        "type": "Service"
+    },
+    {
+        "id": "v15",
+        "label": "Local library",
+        "type": "Service"
+    },
+    {
+        "id": "v16",
+        "label": "Make hospital HOPE Kits",
+        "type": "Service"
+    },
+    {
+        "id": "v17",
+        "label": "Mentor students",
+        "type": "Service"
+    },
+    {
+        "id": "v18",
+        "label": "Plant trees and flowers",
+        "type": "Service"
+    },
+    {
+        "id": "v19",
+        "label": "Recycling program",
+        "type": "Service"
+    },
+    {
+        "id": "v20",
+        "label": "Restock shelves at the food bank",
+        "type": "Service"
+    },
+    {
+        "id": "v21",
+        "label": "Work the voting polls",
+        "type": "Service"
+    }
+]

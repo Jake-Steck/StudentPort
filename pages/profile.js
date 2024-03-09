@@ -112,7 +112,7 @@
 // });
 
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button, TouchableOpacity, ScrollView } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import { Ionicons } from '@expo/vector-icons';
@@ -123,8 +123,6 @@ import Classes, { ClassCard } from './classes'; // Import the ClassCard componen
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-
-
 
 export default function Profile({ route }) {
     const { userInfo } = route.params;
@@ -145,6 +143,11 @@ export default function Profile({ route }) {
         Poppins_600SemiBold,
     });
 
+    const reloadClasses = () => {
+        // You can put any logic here that you want to trigger a reload in Classes.js
+        console.log('Reloading Classes...');
+    };
+
     if (!fontsLoaded) {
         return <Text>Loading...</Text>; // or any loading indicator
     }
@@ -153,7 +156,7 @@ export default function Profile({ route }) {
         <View style={styles.container}>
             <Button title="Portfolio * Remove when done" onPress={() => navigation.navigate('Portfolio')} />
             <Text style={styles.headerText}>Your Classes</Text>
-            <Classes />
+            <Classes reloadClasses={reloadClasses} />
             <View style={styles.gap} />
             <Text style={styles.headerText}>Extra Curriculars</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollViewContent}>

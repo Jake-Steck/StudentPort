@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { removeFromPortfolio, getClasses, getUser } from '../components/firestoreData';
 import { useFonts, Poppins_700Bold, Poppins_600SemiBold, Poppins_400Regular } from '@expo-google-fonts/poppins';
 
-export default function Classes() {
+export default function Classes({ reloadClasses }) {
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
         Poppins_400Regular,
@@ -22,14 +21,18 @@ export default function Classes() {
                 const response = await getClasses(user);
                 console.log('Classes:', response);
                 setClasses(response);
-
             } catch (error) {
                 console.error('Error fetching classes:', error);
             }
         };
 
         fetchData();
-    }, [itemClicked]);
+    }, [itemClicked, reloadClasses]);
+
+    useEffect(() => {
+        reloadClasses();
+    }, [reloadClasses]);
+
 
     const handleRemove = (item) => {
         removeFromPortfolio(item, "classes");
@@ -55,8 +58,6 @@ export default function Classes() {
 }
 
 export function ClassCard({ className, onRemove }) {
-
-
     return (
         <View style={styles.classContainer}>
             <View style={styles.classImage}>
@@ -65,8 +66,10 @@ export function ClassCard({ className, onRemove }) {
                 </View>
             </View>
             <View style={styles.horizontal}>
+                <TouchableOpacity onPress={onRemove} style={styles.remove}>
+                    <MaterialIcons name="highlight-remove" size={24} color="black" />
+                </TouchableOpacity>
                 <Text style={styles.classText}>{className}</Text>
-                <MaterialIcons style={styles.remove} name="highlight-remove" size={24} color="black" onPress={onRemove} />
             </View>
         </View>
     );
@@ -80,11 +83,12 @@ const styles = StyleSheet.create({
     },
     classText: {
         fontFamily: 'Poppins_400Regular',
-        fontSize: 20,
-        textAlign: 'center',
+        fontSize: 14,
+        textAlign: 'left',
+        alignSelf: 'baseline',
         color: 'black',
         top: 60,
-        right: 200
+        right: 220
     },
     classContainer: {
         flexDirection: 'row',
@@ -124,7 +128,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     remove: {
-        top: 60,
-        right: 85,
+        top: 0,
     },
 });

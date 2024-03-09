@@ -28,6 +28,7 @@ import {
 // Data Imports
 import athleticsData from '../components/portfolioData/athletics_data.json';
 import clubsData from '../components/portfolioData/clubs_data.json';
+import serviceData from '../components/portfolioData/service_data.json';
 
 // Class Imports
 import AllClasses from '../components/portfolioData/allClasses';
@@ -45,6 +46,7 @@ import artClassesData from '../components/portfolioData/classes/art_classes.json
 import ClassModal from '../components/classModal';
 import AthleticModal from '../components/athleticModal';
 import ClubModal from '../components/clubModal';
+import ServiceModal from '../components/serviceModal';
 
 const Portfolio = ({ route }) => {
     const [fontsLoaded] = useFonts({
@@ -55,7 +57,7 @@ const Portfolio = ({ route }) => {
 
     const allClasses = AllClasses();
     const { category } = route.params || { category: { data: [] } };
-    const allData = [...allClasses, ...athleticsData, ...clubsData];
+    const allData = [...allClasses, ...athleticsData, ...clubsData, ...serviceData];
 
     const [selectedTab, setSelectedTab] = useState('All');
     const [innerTab, setInnerTab] = useState('All');
@@ -72,6 +74,11 @@ const Portfolio = ({ route }) => {
     });
 
     const [clubModalVisible, setClubModalVisible] = useState({
+        visible: false,
+        item: null,
+    });
+
+    const [serviceModalVisible, setServiceModalVisible] = useState({
         visible: false,
         item: null,
     });
@@ -93,6 +100,8 @@ const Portfolio = ({ route }) => {
             setFilteredData(athleticsData);
         } else if (selectedTab === 'Clubs') {
             setFilteredData(clubsData);
+        } else if (selectedTab === 'Service') {
+            setFilteredData(serviceData);
         } else {
             setFilteredData(category.data);
         }
@@ -106,6 +115,8 @@ const Portfolio = ({ route }) => {
             setAthleticModalVisible({ visible: true, item: item.label });
         } else if (item.type === 'Clubs') {
             setClubModalVisible({ visible: true, item: item.label });
+        } else if (item.type === 'Service') {
+            setServiceModalVisible({ visible: true, item: item.label });
         }
     };
 
@@ -113,6 +124,7 @@ const Portfolio = ({ route }) => {
         setClassModalVisible({ visible: false, item: null });
         setAthleticModalVisible({ visible: false, item: null });
         setClubModalVisible({ visible: false, item: null });
+        setServiceModalVisible({ visible: false, item: null });
     };
 
     const handleTabSelect = (tab) => {
@@ -125,9 +137,10 @@ const Portfolio = ({ route }) => {
     };
 
     const renderTabs = () => {
-        const tabs = ['All', 'Classes', 'Athletics', 'Clubs'];
+        const tabs = ['All', 'Classes', 'Athletics', 'Clubs', 'Service'];
 
         return tabs.map((type, index) => (
+
             <TouchableOpacity
                 key={index.toString()}
                 onPress={() => handleTabSelect(type)}
@@ -359,11 +372,10 @@ const Portfolio = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <ScrollView
-                horizontal
-                contentContainerStyle={styles.filterContainer}
-            >
-                {renderTabs()}
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollViewContent}>
+                <View style={styles.filterContainer}>
+                    {renderTabs()}
+                </View>
             </ScrollView>
 
             {renderClassType()}
@@ -374,6 +386,7 @@ const Portfolio = ({ route }) => {
                 data={filteredData}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
+                keyboardShouldPersistTaps="always"
             />
 
             <ClassModal
@@ -390,6 +403,11 @@ const Portfolio = ({ route }) => {
                 isVisible={clubModalVisible.visible}
                 onClose={handleModalClose}
                 item={clubModalVisible.item}
+            />
+            <ServiceModal
+                isVisible={serviceModalVisible.visible}
+                onClose={handleModalClose}
+                item={serviceModalVisible.item}
             />
         </View>
     );
@@ -411,7 +429,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#3498db',
         borderRadius: 10,
         height: 60,
-
     },
     filterButton: {
         paddingHorizontal: 20,

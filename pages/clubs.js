@@ -1,9 +1,7 @@
-// Inside sports.js
-
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
-import { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio, getClubs } from '../components/firestoreData';
+import { getUser, removeFromPortfolio, getClubs } from '../components/firestoreData';
 
 export default function Clubs() {
     const [fontsLoaded] = useFonts({
@@ -38,16 +36,20 @@ export default function Clubs() {
         setItemClicked(!itemClicked);
     }
 
-
+    const renderItem = ({ item }) => (
+        <TouchableOpacity style={styles.itemContainer} onPress={() => handleRemove(item)}>
+            <Text style={styles.itemText}>{item}</Text>
+        </TouchableOpacity>
+    );
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Clubs</Text>
-            {clubs.map((item, index) => (
-                <TouchableOpacity key={index} onPress={() => handleRemove(item)}>
-                    <Text key={index}>{item}</Text>
-                </TouchableOpacity>
-            ))}
+            <Text style={styles.heading}>Clubs</Text>
+            <FlatList
+                data={clubs}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => index.toString()}
+            />
         </View>
     );
 }
@@ -56,12 +58,24 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#f7f7f7',
-        alignItems: 'center',
-        justifyContent: 'center',
+        padding: 20,
     },
-    text: {
+    heading: {
         fontFamily: 'Poppins_600SemiBold',
         fontSize: 25,
-        justifyContent: "center",
+        marginBottom: 20,
+    },
+    itemContainer: {
+        borderRadius: 8,
+        padding: 15,
+        marginBottom: 10,
+        elevation: 2,
+        borderWidth: 2,
+        borderColor: 'black',
+        backgroundColor: 'white',
+    },
+    itemText: {
+        fontFamily: 'Poppins_300Light',
+        fontSize: 18,
     },
 });
