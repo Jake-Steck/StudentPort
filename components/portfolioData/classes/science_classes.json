@@ -1,0 +1,112 @@
+[
+    {
+        "id": "s1",
+        "label": "Agriculture",
+        "type": "Classes"
+    },
+    {
+        "id": "s2",
+        "label": "Astronomy",
+        "type": "Classes"
+    },
+    {
+        "id": "s3",
+        "label": "Biology",
+        "type": "Classes"
+    },
+    {
+        "id": "s4",
+        "label": "Botany",
+        "type": "Classes"
+    },
+    {
+        "id": "s5",
+        "label": "Chemistry",
+        "type": "Classes"
+    },
+    {
+        "id": "s6",
+        "label": "Earth Science",
+        "type": "Classes"
+    },
+    {
+        "id": "s7",
+        "label": "Environmental Science",
+        "type": "Classes"
+    },
+    {
+        "id": "s8",
+        "label": "Environmental Studies",
+        "type": "Classes"
+    },
+    {
+        "id": "s9",
+        "label": "Forensic Science",
+        "type": "Classes"
+    },
+    {
+        "id": "s10",
+        "label": "Geology",
+        "type": "Classes"
+    },
+    {
+        "id": "s11",
+        "label": "Marine Biology",
+        "type": "Classes"
+    },
+    {
+        "id": "s12",
+        "label": "Oceanography",
+        "type": "Classes"
+    },
+    {
+        "id": "s13",
+        "label": "Physical Science",
+        "type": "Classes"
+    },
+    {
+        "id": "s14",
+        "label": "Physics",
+        "type": "Classes"
+    },
+    {
+        "id": "s15",
+        "label": "Zoology",
+        "type": "Classes"
+    },
+    {
+        "id": "s16",
+        "label": "AP Biology",
+        "type": "Classes"
+    },
+    {
+        "id": "s17",
+        "label": "AP Chemistry",
+        "type": "Classes"
+    },
+    {
+        "id": "s18",
+        "label": "AP Environmental Science",
+        "type": "Classes"
+    },
+    {
+        "id": "s19",
+        "label": "AP Physics 1: Algebra-Based",
+        "type": "Classes"
+    },
+    {
+        "id": "s20",
+        "label": "AP Physics 2: Algebra-Based",
+        "type": "Classes"
+    },
+    {
+        "id": "s21",
+        "label": "AP Physics C: Electricity and Magnetism",
+        "type": "Classes"
+    },
+    {
+        "id": "s22",
+        "label": "AP Physics C: Mechanics",
+        "type": "Classes"
+    }
+]

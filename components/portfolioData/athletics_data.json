@@ -1,11 +1,11 @@
 [
     {
-        "id": "a1",
+        "id": "at1",
         "label": "Athletic Event 1",
         "type": "Athletics"
     },
     {
-        "id": "a2",
+        "id": "at2",
         "label": "Athletic Event 2",
         "type": "Athletics"
     }

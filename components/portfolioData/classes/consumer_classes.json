@@ -1,0 +1,57 @@
+[
+    {
+        "id": "c1",
+        "label": "Chemistry of Foods",
+        "type": "Classes"
+    },
+    {
+        "id": "c2",
+        "label": "CPR Training",
+        "type": "Classes"
+    },
+    {
+        "id": "c3",
+        "label": "Culinary Arts",
+        "type": "Classes"
+    },
+    {
+        "id": "c4",
+        "label": "Early Childhood Development",
+        "type": "Classes"
+    },
+    {
+        "id": "c5",
+        "label": "Early Childhood Education",
+        "type": "Classes"
+    },
+    {
+        "id": "c6",
+        "label": "Family Studies",
+        "type": "Classes"
+    },
+    {
+        "id": "c7",
+        "label": "Fashion and Retail Merchandising",
+        "type": "Classes"
+    },
+    {
+        "id": "c8",
+        "label": "Fashion Construction",
+        "type": "Classes"
+    },
+    {
+        "id": "c9",
+        "label": "Home Economics",
+        "type": "Classes"
+    },
+    {
+        "id": "c10",
+        "label": "Interior Design",
+        "type": "Classes"
+    },
+    {
+        "id": "c11",
+        "label": "Nutrition",
+        "type": "Classes"
+    }
+]

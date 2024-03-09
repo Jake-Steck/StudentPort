@@ -1,0 +1,92 @@
+[
+    {
+        "id": "m1",
+        "label": "Algebra 1",
+        "type": "Classes"
+    },
+    {
+        "id": "m2",
+        "label": "Algebra 2",
+        "type": "Classes"
+    },
+    {
+        "id": "m3",
+        "label": "Calculus",
+        "type": "Classes"
+    },
+    {
+        "id": "m4",
+        "label": "Fundamentals of Math",
+        "type": "Classes"
+    },
+    {
+        "id": "m5",
+        "label": "Geometry",
+        "type": "Classes"
+    },
+    {
+        "id": "m6",
+        "label": "Integrated Math",
+        "type": "Classes"
+    },
+    {
+        "id": "m7",
+        "label": "Multivariable Calculus",
+        "type": "Classes"
+    },
+    {
+        "id": "m8",
+        "label": "Practical Math",
+        "type": "Classes"
+    },
+    {
+        "id": "m9",
+        "label": "Pre-Algebra",
+        "type": "Classes"
+    },
+    {
+        "id": "m10",
+        "label": "Precalculus",
+        "type": "Classes"
+    },
+    {
+        "id": "m11",
+        "label": "Probability",
+        "type": "Classes"
+    },
+    {
+        "id": "m12",
+        "label": "Quantitative Literacy",
+        "type": "Classes"
+    },
+    {
+        "id": "m13",
+        "label": "Statistics",
+        "type": "Classes"
+    },
+    {
+        "id": "m14",
+        "label": "Trigonometry",
+        "type": "Classes"
+    },
+    {
+        "id": "m15",
+        "label": "AP Calculus AB",
+        "type": "Classes"
+    },
+    {
+        "id": "m16",
+        "label": "AP Calculus BC",
+        "type": "Classes"
+    },
+    {
+        "id": "m17",
+        "label": "AP Precalculus",
+        "type": "Classes"
+    },
+    {
+        "id": "m18",
+        "label": "AP Statistics",
+        "type": "Classes"
+    }
+]

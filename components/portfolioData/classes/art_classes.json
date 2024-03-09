@@ -1,0 +1,147 @@
+[
+    {
+        "id": "a1",
+        "label": "Drawing",
+        "type": "Classes"
+    },
+    {
+        "id": "a2",
+        "label": "Painting",
+        "type": "Classes"
+    },
+    {
+        "id": "a3",
+        "label": "Choir",
+        "type": "Classes"
+    },
+    {
+        "id": "a4",
+        "label": "Concert Band",
+        "type": "Classes"
+    },
+    {
+        "id": "a5",
+        "label": "Dance",
+        "type": "Classes"
+    },
+    {
+        "id": "a6",
+        "label": "Drama",
+        "type": "Classes"
+    },
+    {
+        "id": "a7",
+        "label": "Guitar",
+        "type": "Classes"
+    },
+    {
+        "id": "a8",
+        "label": "Jazz Band",
+        "type": "Classes"
+    },
+    {
+        "id": "a9",
+        "label": "Marching Band",
+        "type": "Classes"
+    },
+    {
+        "id": "a10",
+        "label": "Music Theory",
+        "type": "Classes"
+    },
+    {
+        "id": "a11",
+        "label": "Orchestra",
+        "type": "Classes"
+    },
+    {
+        "id": "a12",
+        "label": "Percussion",
+        "type": "Classes"
+    },
+    {
+        "id": "a13",
+        "label": "Piano",
+        "type": "Classes"
+    },
+    {
+        "id": "a14",
+        "label": "Theater Technology",
+        "type": "Classes"
+    },
+    {
+        "id": "a15",
+        "label": "World Music",
+        "type": "Classes"
+    },
+    {
+        "id": "a16",
+        "label": "3-D Art",
+        "type": "Classes"
+    },
+    {
+        "id": "a17",
+        "label": "Art History",
+        "type": "Classes"
+    },
+    {
+        "id": "a18",
+        "label": "Ceramics",
+        "type": "Classes"
+    },
+    {
+        "id": "a19",
+        "label": "Digital Media",
+        "type": "Classes"
+    },
+    {
+        "id": "a20",
+        "label": "Film Production",
+        "type": "Classes"
+    },
+    {
+        "id": "a21",
+        "label": "Jewelry Design",
+        "type": "Classes"
+    },
+    {
+        "id": "a22",
+        "label": "Photography",
+        "type": "Classes"
+    },
+    {
+        "id": "a23",
+        "label": "Printmaking",
+        "type": "Classes"
+    },
+    {
+        "id": "a24",
+        "label": "Sculpture",
+        "type": "Classes"
+    },
+    {
+        "id": "a25",
+        "label": "AP Drawing",
+        "type": "Classes"
+    },
+    {
+        "id": "a26",
+        "label": "AP 2-D Art & Design",
+        "type": "Classes"
+    },
+    {
+        "id": "a27",
+        "label": "AP 3-D Art & Design",
+        "type": "Classes"
+    },
+    {
+        "id": "a28",
+        "label": "AP Art History",
+        "type": "Classes"
+    },
+    {
+        "id": "a29",
+        "label": "AP Music History",
+        "type": "Classes"
+    }
+]

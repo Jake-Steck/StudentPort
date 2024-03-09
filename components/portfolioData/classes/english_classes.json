@@ -1,42 +1,117 @@
 [
     {
         "id": "e1",
-        "label": "English 1",
+        "label": "American Literature",
         "type": "Classes"
     },
     {
         "id": "e2",
-        "label": "English 2",
+        "label": "British Literature",
         "type": "Classes"
     },
     {
         "id": "e3",
-        "label": "English 3",
+        "label": "Contemporary Literature",
         "type": "Classes"
     },
     {
         "id": "e4",
-        "label": "English 4",
+        "label": "Creative Writing",
         "type": "Classes"
     },
     {
-        "id": "h1",
-        "label": "Humanities 1",
+        "id": "e5",
+        "label": "Communication Skills",
         "type": "Classes"
     },
     {
-        "id": "h2",
-        "label": "Humanities 2",
+        "id": "e6",
+        "label": "Debate",
         "type": "Classes"
     },
     {
-        "id": "h3",
-        "label": "Humanities 3",
+        "id": "e7",
+        "label": "English Language and Composition",
         "type": "Classes"
     },
     {
-        "id": "h4",
-        "label": "Humanities 4",
+        "id": "e8",
+        "label": "English Literature and Composition",
+        "type": "Classes"
+    },
+    {
+        "id": "e9",
+        "label": "Humanities",
+        "type": "Classes"
+    },
+    {
+        "id": "e10",
+        "label": "Journalism",
+        "type": "Classes"
+    },
+    {
+        "id": "e11",
+        "label": "Literary Analysis",
+        "type": "Classes"
+    },
+    {
+        "id": "e12",
+        "label": "Modern Literature",
+        "type": "Classes"
+    },
+    {
+        "id": "e13",
+        "label": "Poetry",
+        "type": "Classes"
+    },
+    {
+        "id": "e14",
+        "label": "Popular Literature",
+        "type": "Classes"
+    },
+    {
+        "id": "e15",
+        "label": "Rhetoric",
+        "type": "Classes"
+    },
+    {
+        "id": "e16",
+        "label": "Shakespeare",
+        "type": "Classes"
+    },
+    {
+        "id": "e17",
+        "label": "Technical Writing",
+        "type": "Classes"
+    },
+    {
+        "id": "e18",
+        "label": "World Literature",
+        "type": "Classes"
+    },
+    {
+        "id": "e19",
+        "label": "Written and Oral Communication",
+        "type": "Classes"
+    },
+    {
+        "id": "e20",
+        "label": "AP Research",
+        "type": "Classes"
+    },
+    {
+        "id": "e21",
+        "label": "AP Seminar",
+        "type": "Classes"
+    },
+    {
+        "id": "e22",
+        "label": "AP English Language and Composition",
+        "type": "Classes"
+    },
+    {
+        "id": "e23",
+        "label": "AP English Literature and Composition",
         "type": "Classes"
     }
 ]

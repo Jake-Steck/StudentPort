@@ -1,0 +1,137 @@
+[
+    {
+        "id": "ss1",
+        "label": "Cultural Anthropology",
+        "type": "Classes"
+    },
+    {
+        "id": "ss2",
+        "label": "Current Events",
+        "type": "Classes"
+    },
+    {
+        "id": "ss3",
+        "label": "European History",
+        "type": "Classes"
+    },
+    {
+        "id": "ss4",
+        "label": "Geography",
+        "type": "Classes"
+    },
+    {
+        "id": "ss5",
+        "label": "Global Studies",
+        "type": "Classes"
+    },
+    {
+        "id": "ss6",
+        "label": "Human Geography",
+        "type": "Classes"
+    },
+    {
+        "id": "ss7",
+        "label": "International Relations",
+        "type": "Classes"
+    },
+    {
+        "id": "ss8",
+        "label": "Law",
+        "type": "Classes"
+    },
+    {
+        "id": "ss9",
+        "label": "Modern World Studies",
+        "type": "Classes"
+    },
+    {
+        "id": "ss10",
+        "label": "Physical Anthropology",
+        "type": "Classes"
+    },
+    {
+        "id": "ss11",
+        "label": "Political Studies",
+        "type": "Classes"
+    },
+    {
+        "id": "ss12",
+        "label": "Psychology",
+        "type": "Classes"
+    },
+    {
+        "id": "ss13",
+        "label": "Religious Studies",
+        "type": "Classes"
+    },
+    {
+        "id": "ss14",
+        "label": "Sociology",
+        "type": "Classes"
+    },
+    {
+        "id": "ss15",
+        "label": "U.S. Government",
+        "type": "Classes"
+    },
+    {
+        "id": "ss16",
+        "label": "U.S. History",
+        "type": "Classes"
+    },
+    {
+        "id": "ss17",
+        "label": "Women’s Studies",
+        "type": "Classes"
+    },
+    {
+        "id": "ss18",
+        "label": "World History",
+        "type": "Classes"
+    },
+    {
+        "id": "ss19",
+        "label": "World Politics",
+        "type": "Classes"
+    },
+    {
+        "id": "ss20",
+        "label": "World Religions",
+        "type": "Classes"
+    },
+    {
+        "id": "ss21",
+        "label": "AP Comparative Government and Politics",
+        "type": "Classes"
+    },
+    {
+        "id": "ss22",
+        "label": "AP European History",
+        "type": "Classes"
+    },
+    {
+        "id": "ss23",
+        "label": "AP Human Geography",
+        "type": "Classes"
+    },
+    {
+        "id": "ss24",
+        "label": "AP Psychology",
+        "type": "Classes"
+    },
+    {
+        "id": "ss25",
+        "label": "AP United States Government and Politics",
+        "type": "Classes"
+    },
+    {
+        "id": "ss26",
+        "label": "AP United States History",
+        "type": "Classes"
+    },
+    {
+        "id": "ss27",
+        "label": "AP World History: Modern",
+        "type": "Classes"
+    }
+]

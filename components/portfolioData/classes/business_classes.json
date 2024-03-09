@@ -1,12 +1,52 @@
 [
     {
-        "id": "201",
-        "label": "Business 101",
+        "id": "b1",
+        "label": "Accounting",
         "type": "Classes"
     },
     {
-        "id": "202",
-        "label": "Business 202",
+        "id": "b2",
+        "label": "Business Law",
+        "type": "Classes"
+    },
+    {
+        "id": "b3",
+        "label": "Business Management",
+        "type": "Classes"
+    },
+    {
+        "id": "b4",
+        "label": "Consumer Education",
+        "type": "Classes"
+    },
+    {
+        "id": "b5",
+        "label": "Entrepreneurial Skills",
+        "type": "Classes"
+    },
+    {
+        "id": "b6",
+        "label": "Introduction to Business",
+        "type": "Classes"
+    },
+    {
+        "id": "b7",
+        "label": "Marketing",
+        "type": "Classes"
+    },
+    {
+        "id": "b8",
+        "label": "Personal Finance",
+        "type": "Classes"
+    },
+    {
+        "id": "b9",
+        "label": "AP Macroeconomics",
+        "type": "Classes"
+    },
+    {
+        "id": "b10",
+        "label": "AP Microeconomics",
         "type": "Classes"
     }
 ]

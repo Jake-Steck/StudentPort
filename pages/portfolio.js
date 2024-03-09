@@ -1,11 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, FlatList, StyleSheet, Modal } from 'react-native';
-import { useFonts, Poppins_700Bold, Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    FlatList,
+    StyleSheet,
+    Modal,
+    ScrollView,
+} from 'react-native';
+import {
+    useFonts,
+    Poppins_700Bold,
+    Poppins_400Regular,
+    Poppins_600SemiBold,
+} from '@expo-google-fonts/poppins';
 
 // User Imports
 import { auth, database } from '../firebaseConfig';
-import { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports } from '../components/firestoreData';
-
+import {
+    getUser,
+    getUserPortfolioID,
+    addToPortfolio,
+    getClasses,
+    getSports,
+} from '../components/firestoreData';
 
 // Data Imports
 import athleticsData from '../components/portfolioData/athletics_data.json';
@@ -14,13 +32,19 @@ import athleticsData from '../components/portfolioData/athletics_data.json';
 import AllClasses from '../components/portfolioData/allClasses';
 import englishClassesData from '../components/portfolioData/classes/english_classes.json';
 import businessClassesData from '../components/portfolioData/classes/business_classes.json';
+import mathClassesData from '../components/portfolioData/classes/math_classes.json';
+import scienceClassesData from '../components/portfolioData/classes/science_classes.json';
+import socialStudiesClassesData from '../components/portfolioData/classes/social_classes.json';
+import worldLanguageClassesData from '../components/portfolioData/classes/language_classes.json';
+import consumerClassesData from '../components/portfolioData/classes/consumer_classes.json';
+import technologyClassesData from '../components/portfolioData/classes/technology_classes.json';
+import artClassesData from '../components/portfolioData/classes/art_classes.json';
 
 // Modal Imports
 import ClassModal from '../components/classModal';
 import AthleticModal from '../components/athleticModal';
 
 const Portfolio = ({ route }) => {
-
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
         Poppins_400Regular,
@@ -36,21 +60,24 @@ const Portfolio = ({ route }) => {
 
     const [filteredData, setFilteredData] = useState(category.data);
 
-    const [classModalVisible, setClassModalVisible] = useState({ visible: false, item: null });
-    const [athleticModalVisible, setAthleticModalVisible] = useState({ visible: false, item: null });
-
+    const [classModalVisible, setClassModalVisible] = useState({
+        visible: false,
+        item: null,
+    });
+    const [athleticModalVisible, setAthleticModalVisible] = useState({
+        visible: false,
+        item: null,
+    });
 
     useEffect(() => {
         filterData();
     }, [selectedTab, innerTab, category]);
 
-
-
     const filterData = () => {
         if (selectedTab === 'All') {
             setFilteredData(allData);
         } else if (selectedTab === 'Classes') {
-            const filtered = allClasses.filter(item => {
+            const filtered = allClasses.filter((item) => {
                 return innerTab === 'All' ? true : item.label === innerTab;
             });
             console.log('Filtered Data:', filtered);
@@ -62,8 +89,6 @@ const Portfolio = ({ route }) => {
         }
     };
 
-
-
     const handleItemPress = (item) => {
         console.log('Item Pressed:', item);
         if (item.type === 'Classes') {
@@ -71,7 +96,7 @@ const Portfolio = ({ route }) => {
         } else if (item.type === 'Athletics') {
             setAthleticModalVisible({ visible: true, item: item.label });
         }
-    }
+    };
 
     const handleModalClose = () => {
         setClassModalVisible({ visible: false, item: null });
@@ -85,7 +110,7 @@ const Portfolio = ({ route }) => {
 
     const handleClassTypeSelect = (tab) => {
         setInnerTab(tab);
-    }
+    };
 
     const renderTabs = () => {
         const tabs = ['All', 'Classes', 'Athletics'];
@@ -94,7 +119,10 @@ const Portfolio = ({ route }) => {
             <TouchableOpacity
                 key={index.toString()}
                 onPress={() => handleTabSelect(type)}
-                style={[styles.filterButton, selectedTab === type && styles.selectedFilter]}
+                style={[
+                    styles.filterButton,
+                    selectedTab === type && styles.selectedFilter,
+                ]}
             >
                 <Text style={styles.filterButtonText}>{type}</Text>
             </TouchableOpacity>
@@ -106,18 +134,51 @@ const Portfolio = ({ route }) => {
             return null;
         }
 
-        const classTypes = ['All', 'English', 'Business'];
+        const classTypes = [
+            'All',
+            'English',
+            'Business',
+            'Math',
+            'Science',
+            'Social Studies',
+            'Arts',
+            'Technology',
+            'Language',
+            'Consumer Sciences',
+        ];
 
-        return classTypes.map((type, index) => (
+        const buttons = classTypes.map((type, index) => (
             <TouchableOpacity
                 key={index.toString()}
                 onPress={() => handleClassTypeSelect(type)}
-                style={[styles.filterButton, innerTab === type && styles.selectedFilter]}
+                style={[
+                    styles.filterButton,
+                    innerTab === type && styles.selectedFilter,
+                ]}
             >
                 <Text style={styles.filterButtonText}>{type}</Text>
             </TouchableOpacity>
         ));
-    }
+
+        const rows = [];
+        for (let i = 0; i < buttons.length; i += 3) {
+            rows.push(
+                <View key={i} style={{ flexDirection: 'row', flex: 1 }}>
+                    {buttons.slice(i, i + 3)}
+                </View>
+            );
+        }
+
+        return (
+            <ScrollView
+                horizontal
+                contentContainerStyle={styles.filterContainer}
+            >
+                {rows}
+            </ScrollView>
+        );
+    };
+
 
     const renderClassItem = () => {
         if (selectedTab === 'Classes') {
@@ -128,12 +189,14 @@ const Portfolio = ({ route }) => {
                             data={englishClassesData}
                             renderItem={({ item }) => (
                                 <View style={styles.filterData}>
-                                    <TouchableOpacity onPress={() => handleItemPress(item)}>
+                                    <TouchableOpacity
+                                        onPress={() => handleItemPress(item)}
+                                    >
                                         <Text style={styles.filterDataText}>{item.label}</Text>
                                     </TouchableOpacity>
                                 </View>
                             )}
-                            keyExtractor={item => item.id.toString()}
+                            keyExtractor={(item) => item.id.toString()}
                         />
                     );
                 case 'Business':
@@ -142,12 +205,126 @@ const Portfolio = ({ route }) => {
                             data={businessClassesData}
                             renderItem={({ item }) => (
                                 <View style={styles.filterData}>
-                                    <TouchableOpacity onPress={() => handleItemPress(item)}>
+                                    <TouchableOpacity
+                                        onPress={() => handleItemPress(item)}
+                                    >
                                         <Text style={styles.filterDataText}>{item.label}</Text>
                                     </TouchableOpacity>
                                 </View>
                             )}
-                            keyExtractor={item => item.id.toString()}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    );
+                case 'Math':
+                    return (
+                        <FlatList
+                            data={mathClassesData}
+                            renderItem={({ item }) => (
+                                <View style={styles.filterData}>
+                                    <TouchableOpacity
+                                        onPress={() => handleItemPress(item)}
+                                    >
+                                        <Text style={styles.filterDataText}>{item.label}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    );
+                case 'Science':
+                    return (
+                        <FlatList
+                            data={scienceClassesData}
+                            renderItem={({ item }) => (
+                                <View style={styles.filterData}>
+                                    <TouchableOpacity
+                                        onPress={() => handleItemPress(item)}
+                                    >
+                                        <Text style={styles.filterDataText}>{item.label}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    );
+                case 'Social Studies':
+                    return (
+                        <FlatList
+                            data={socialStudiesClassesData}
+                            renderItem={({ item }) => (
+                                <View style={styles.filterData}>
+                                    <TouchableOpacity
+                                        onPress={() => handleItemPress(item)}
+                                    >
+                                        <Text style={styles.filterDataText}>{item.label}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    );
+                case 'Arts':
+                    return (
+                        <FlatList
+                            data={artClassesData}
+                            renderItem={({ item }) => (
+                                <View style={styles.filterData}>
+                                    <TouchableOpacity
+                                        onPress={() => handleItemPress(item)}
+                                    >
+                                        <Text style={styles.filterDataText}>{item.label}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    );
+                case 'Technology':
+                    return (
+                        <FlatList
+                            data={technologyClassesData}
+                            renderItem={({ item }) => (
+                                <View style={styles.filterData}>
+                                    <TouchableOpacity
+                                        onPress={() => handleItemPress(item)}
+                                    >
+                                        <Text style={styles.filterDataText}>{item.label}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    );
+                case 'Language':
+                    return (
+                        <FlatList
+                            data={worldLanguageClassesData}
+                            renderItem={({ item }) => (
+                                <View style={styles.filterData}>
+                                    <TouchableOpacity
+                                        onPress={() => handleItemPress(item)}
+                                    >
+                                        <Text style={styles.filterDataText}>{item.label}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    );
+                case 'Consumer Sciences':
+                    return (
+                        <FlatList
+                            data={consumerClassesData}
+                            renderItem={({ item }) => (
+                                <View style={styles.filterData}>
+                                    <TouchableOpacity
+                                        onPress={() => handleItemPress(item)}
+                                    >
+                                        <Text style={styles.filterDataText}>{item.label}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                            keyExtractor={(item) => item.id.toString()}
                         />
                     );
                 default:
@@ -168,30 +345,38 @@ const Portfolio = ({ route }) => {
         return <Text>Loading...</Text>;
     }
 
-
     return (
         <View style={styles.container}>
-            <View style={styles.filterContainer}>
+            <ScrollView
+                horizontal
+                contentContainerStyle={styles.filterContainer}
+            >
                 {renderTabs()}
-            </View>
+            </ScrollView>
 
-            <View style={styles.filterContainer}>
-                {renderClassType()}
-            </View>
+            {renderClassType()}
 
             {selectedTab === 'Classes' ? renderClassItem() : null}
 
             <FlatList
                 data={filteredData}
                 renderItem={renderItem}
-                keyExtractor={item => item.id.toString()}
+                keyExtractor={(item) => item.id.toString()}
             />
 
-            <ClassModal isVisible={classModalVisible.visible} onClose={handleModalClose} item={classModalVisible.item} />
-            <AthleticModal isVisible={athleticModalVisible.visible} onClose={handleModalClose} item={athleticModalVisible.item} />
+            <ClassModal
+                isVisible={classModalVisible.visible}
+                onClose={handleModalClose}
+                item={classModalVisible.item}
+            />
+            <AthleticModal
+                isVisible={athleticModalVisible.visible}
+                onClose={handleModalClose}
+                item={athleticModalVisible.item}
+            />
         </View>
     );
-}
+};
 
 export default Portfolio;
 
@@ -208,6 +393,8 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         backgroundColor: '#3498db',
         borderRadius: 10,
+        height: 60,
+
     },
     filterButton: {
         paddingHorizontal: 20,
@@ -234,6 +421,5 @@ const styles = StyleSheet.create({
     },
     selectedFilter: {
         backgroundColor: '#1c5c85',
-    }
+    },
 });
-

@@ -1,0 +1,82 @@
+[
+    {
+        "id": "t1",
+        "label": "Animation",
+        "type": "Classes"
+    },
+    {
+        "id": "t2",
+        "label": "App Development",
+        "type": "Classes"
+    },
+    {
+        "id": "t3",
+        "label": "Audio Production",
+        "type": "Classes"
+    },
+    {
+        "id": "t4",
+        "label": "Computer Programming",
+        "type": "Classes"
+    },
+    {
+        "id": "t5",
+        "label": "Computer Repair",
+        "type": "Classes"
+    },
+    {
+        "id": "t6",
+        "label": "Film Production",
+        "type": "Classes"
+    },
+    {
+        "id": "t7",
+        "label": "Graphic Design",
+        "type": "Classes"
+    },
+    {
+        "id": "t8",
+        "label": "Keyboarding",
+        "type": "Classes"
+    },
+    {
+        "id": "t9",
+        "label": "Media Technology",
+        "type": "Classes"
+    },
+    {
+        "id": "t10",
+        "label": "Music Production",
+        "type": "Classes"
+    },
+    {
+        "id": "t11",
+        "label": "Video Game Development",
+        "type": "Classes"
+    },
+    {
+        "id": "t12",
+        "label": "Web Design",
+        "type": "Classes"
+    },
+    {
+        "id": "t13",
+        "label": "Web Programming",
+        "type": "Classes"
+    },
+    {
+        "id": "t14",
+        "label": "Word Processing",
+        "type": "Classes"
+    },
+    {
+        "id": "t15",
+        "label": "AP Computer Science A",
+        "type": "Classes"
+    },
+    {
+        "id": "t16",
+        "label": "AP Computer Science Principles",
+        "type": "Classes"
+    }
+]

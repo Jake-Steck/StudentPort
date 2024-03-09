@@ -1,0 +1,112 @@
+[
+    {
+        "id": "fl1",
+        "label": "American Sign Language",
+        "type": "Classes"
+    },
+    {
+        "id": "fl2",
+        "label": "Ancient Greek",
+        "type": "Classes"
+    },
+    {
+        "id": "fl3",
+        "label": "Arabic",
+        "type": "Classes"
+    },
+    {
+        "id": "fl4",
+        "label": "Chinese",
+        "type": "Classes"
+    },
+    {
+        "id": "fl5",
+        "label": "French",
+        "type": "Classes"
+    },
+    {
+        "id": "fl6",
+        "label": "German",
+        "type": "Classes"
+    },
+    {
+        "id": "fl7",
+        "label": "Hebrew",
+        "type": "Classes"
+    },
+    {
+        "id": "fl8",
+        "label": "Italian",
+        "type": "Classes"
+    },
+    {
+        "id": "fl9",
+        "label": "Japanese",
+        "type": "Classes"
+    },
+    {
+        "id": "fl10",
+        "label": "Korean",
+        "type": "Classes"
+    },
+    {
+        "id": "fl11",
+        "label": "Latin",
+        "type": "Classes"
+    },
+    {
+        "id": "fl12",
+        "label": "Portuguese",
+        "type": "Classes"
+    },
+    {
+        "id": "fl13",
+        "label": "Russian",
+        "type": "Classes"
+    },
+    {
+        "id": "fl14",
+        "label": "Spanish",
+        "type": "Classes"
+    },
+    {
+        "id": "fl15",
+        "label": "AP Chinese Language and Culture",
+        "type": "Classes"
+    },
+    {
+        "id": "fl16",
+        "label": "AP French Language and Culture",
+        "type": "Classes"
+    },
+    {
+        "id": "fl17",
+        "label": "AP German Language and Culture",
+        "type": "Classes"
+    },
+    {
+        "id": "fl18",
+        "label": "AP Italian Language and Culture",
+        "type": "Classes"
+    },
+    {
+        "id": "fl19",
+        "label": "AP Japanese Language and Culture",
+        "type": "Classes"
+    },
+    {
+        "id": "fl20",
+        "label": "AP Latin",
+        "type": "Classes"
+    },
+    {
+        "id": "fl21",
+        "label": "AP Spanish Language and Culture",
+        "type": "Classes"
+    },
+    {
+        "id": "fl22",
+        "label": "AP Spanish Literature and Culture",
+        "type": "Classes"
+    }
+]
