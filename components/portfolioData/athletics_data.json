@@ -1,12 +1,137 @@
 [
     {
         "id": "at1",
-        "label": "Athletic Event 1",
+        "label": "Badminton",
         "type": "Athletics"
     },
     {
         "id": "at2",
-        "label": "Athletic Event 2",
+        "label": "Baseball (Boys)",
+        "type": "Athletics"
+    },
+    {
+        "id": "at3",
+        "label": "Basketball",
+        "type": "Athletics"
+    },
+    {
+        "id": "at4",
+        "label": "Bowling",
+        "type": "Athletics"
+    },
+    {
+        "id": "at5",
+        "label": "Cheerleading / Competitive Spirit Squads",
+        "type": "Athletics"
+    },
+    {
+        "id": "at6",
+        "label": "Cross Country",
+        "type": "Athletics"
+    },
+    {
+        "id": "at7",
+        "label": "Dance Team",
+        "type": "Athletics"
+    },
+    {
+        "id": "at8",
+        "label": "Field Hockey",
+        "type": "Athletics"
+    },
+    {
+        "id": "at9",
+        "label": "Flag Football (Girls)",
+        "type": "Athletics"
+    },
+    {
+        "id": "at10",
+        "label": "Football (Boys)",
+        "type": "Athletics"
+    },
+    {
+        "id": "at11",
+        "label": "Golf",
+        "type": "Athletics"
+    },
+    {
+        "id": "at12",
+        "label": "Gymnastics",
+        "type": "Athletics"
+    },
+    {
+        "id": "at13",
+        "label": "Hockey",
+        "type": "Athletics"
+    },
+    {
+        "id": "at14",
+        "label": "Indoor Track & Field",
+        "type": "Athletics"
+    },
+    {
+        "id": "at15",
+        "label": "Lacrosse",
+        "type": "Athletics"
+    },
+    {
+        "id": "at16",
+        "label": "Skiing & Snowboarding",
+        "type": "Athletics"
+    },
+    {
+        "id": "at17",
+        "label": "Soccer",
+        "type": "Athletics"
+    },
+    {
+        "id": "at18",
+        "label": "Softball (Girls)",
+        "type": "Athletics"
+    },
+    {
+        "id": "at19",
+        "label": "Slow Pitch Softball (Girls)",
+        "type": "Athletics"
+    },
+    {
+        "id": "at20",
+        "label": "Surf",
+        "type": "Athletics"
+    },
+    {
+        "id": "at21",
+        "label": "Swimming & Diving",
+        "type": "Athletics"
+    },
+    {
+        "id": "at22",
+        "label": "Tennis",
+        "type": "Athletics"
+    },
+    {
+        "id": "at23",
+        "label": "Track & Field",
+        "type": "Athletics"
+    },
+    {
+        "id": "at24",
+        "label": "Volleyball",
+        "type": "Athletics"
+    },
+    {
+        "id": "at25",
+        "label": "Water Polo",
+        "type": "Athletics"
+    },
+    {
+        "id": "at26",
+        "label": "Weightlifting",
+        "type": "Athletics"
+    },
+    {
+        "id": "at27",
+        "label": "Wrestling",
         "type": "Athletics"
     }
 ]

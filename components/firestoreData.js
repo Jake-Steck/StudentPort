@@ -52,7 +52,7 @@ const getUserPortfolioID = async () => {
     }
 }
 
-const addToPortfolio = async (item, type) => {
+const addToPortfolio = async (item, type, level) => {
     const uid = await getUser(); // Use await to get the user ID
     // const type = handleItemType(item);
     const portfolioID = await getUserPortfolioID(); // Use await to get the portfolio ID
@@ -60,7 +60,7 @@ const addToPortfolio = async (item, type) => {
     if (portfolioID) {
         const portfolioDocRef = doc(db, `users/${uid}/portfolio/${portfolioID}`);
         await updateDoc(portfolioDocRef, {
-            [type]: arrayUnion(item)
+            [type]: arrayUnion(item + " - " + level)
         });
     } else {
         console.log("Portfolio ID not found.");
