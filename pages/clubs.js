@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f7f7f7',
         padding: 20,
+        top: 50,
     },
     heading: {
         fontFamily: 'Poppins_600SemiBold',
