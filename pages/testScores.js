@@ -18,6 +18,7 @@ export default function TestScores({ route }) {
     const [selectedTest, setSelectedTest] = useState("SAT");
     const [readingOrWriting, toggleReading] = useState("R");
 
+
     // SAT Scores3
     const [satEnglish, setSATEnglish] = useState(null);
     const [satMath, setSATMath] = useState(null);
@@ -225,6 +226,9 @@ export default function TestScores({ route }) {
                 <Text style={styles.compositeScore}>{displayComposite}</Text>
             </View>
             <View style={styles.gap} />
+            <TouchableOpacity>
+                <Text style={styles.back} onPress={() => navigation.push('Profile')}>Back</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -388,5 +392,12 @@ const styles = StyleSheet.create({
         borderRadius: 24,
         alignSelf: 'center',
         top: 25,
-    }
+    },
+    back: {
+        fontFamily: 'Poppins_600SemiBold',
+        fontSize: 18,
+        textAlign: 'center',
+        top: 40,
+        color: 'black',
+    },
 });

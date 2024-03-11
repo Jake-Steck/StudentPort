@@ -10,6 +10,8 @@ export default function Service() {
         Poppins_600SemiBold,
     });
     const [service, setService] = useState([]);
+    const [itemClicked, setItemClicked] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,7 +25,7 @@ export default function Service() {
         };
 
         fetchData();
-    }, []); // Remove itemClicked from the dependency array to avoid infinite loop
+    }, [itemClicked]); // Remove itemClicked from the dependency array to avoid infinite loop
 
     if (!fontsLoaded) {
         return <Text>Loading...</Text>; // or any loading indicator
@@ -31,8 +33,7 @@ export default function Service() {
 
     const handleRemove = async (item) => {
         await removeFromPortfolio(item, "service");
-        const updatedService = await getService(userId);
-        setService(updatedService);
+        setService(!itemClicked);
     }
 
     const renderItem = ({ item }) => (
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f7f7f7',
         padding: 20,
+        top: 50,
     },
     heading: {
         fontFamily: 'Poppins_600SemiBold',

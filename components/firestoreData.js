@@ -100,6 +100,25 @@ const getClasses = async (userId) => {
     }
 }
 
+const getTesting = async (userId) => {
+    try {
+        const portfolioID = await getUserPortfolioID(userId);
+        const portfolioDoc = await getDoc(doc(db, `users/${userId}/portfolio/${portfolioID}`));
+
+        if (portfolioDoc.exists()) {
+            const portfolioData = portfolioDoc.data();
+            const testing = portfolioData ? portfolioData.testing || [] : [];
+            return testing;
+        } else {
+            console.log("No portfolio document found!");
+            return [];
+        }
+    } catch (e) {
+        console.error("Error fetching service:", e);
+        return [];
+    }
+}
+
 const getSports = async (userId) => {
     try {
         const portfolioID = await getUserPortfolioID(userId);
@@ -176,4 +195,4 @@ const getOther = async (userId) => {
     }
 }
 
-export { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio, getClubs, getService, getOther };
+export { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio, getClubs, getService, getOther, getTesting };
