@@ -4,34 +4,36 @@
 </p>
 
 ## Install the Following Dependencies
-### Use npm install, or npx expo install (if you have expo installed)
-
-- expo-google-fonts/poppins
-- expo/webpack-config
-- react-native-async-storage/async-storage
-- react-navigation/native
-- react-navigation/native-stack
-- expo
-- expo-auth-session
-- expo-crypto
-- expo-image-picker
-- expo-splash-screen
-- expo-status-bar
-- expo-web-browser
-- firebase
-- react
-- react-dom
-- react-native
-- react-native-safe-area-context
-- react-native-screens
-- react-native-web
+Use npm install, or npx expo install (if you have expo installed)
+>- expo-google-fonts/poppins
+>- expo/webpack-config
+>- react-native-async-storage/async-storage
+>- react-navigation/native
+>- react-navigation/native-stack
+>- expo
+>- expo-auth-session
+>- expo-crypto
+>- expo-image-picker
+>- expo-splash-screen
+>- expo-status-bar
+>- expo-web-browser
+>- firebase
+>- react
+>- react-dom
+>- react-native
+>- react-native-safe-area-context
+>- react-native-screens
+>- react-native-web
 
 
 ## Usage
 
-```sh
-npm run start
-```
+1. To install expo, follow the [Expo](https://docs.expo.dev/get-started/installation/) installation guide
+2. Install the dependecies above
+3. Install the mobile Expo Go app (Some features will be unavailable)
+4. Clone this github using `gh repo clone fbla24`
+5. Enter the code directory
+6. Run the code using the [Expo](https://docs.expo.dev/more/expo-cli/) run commands
 
 ## Show your support
 
