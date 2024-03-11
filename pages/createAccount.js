@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
@@ -43,7 +42,9 @@ export default function CreateAccount({ navigation }) {
     }
 
     let signUp = () => {
-        createUserWithEmailAndPassword(auth, email, password)
+        const lowerCaseEmail = email.toLowerCase(); // Convert email to lowercase
+
+        createUserWithEmailAndPassword(auth, lowerCaseEmail, password)
             .then((userCredential) => {
                 const user = userCredential.user;
 
@@ -52,8 +53,8 @@ export default function CreateAccount({ navigation }) {
                     displayName: `${firstName} ${lastName}`,
                 }).then(() => {
                     console.log("Profile updated");
-                    createUser(email, auth.currentUser.displayName);
-                    navigation.navigate('Profile', { userInfo: auth.currentUser.displayName });
+                    createUser(lowerCaseEmail, auth.currentUser.displayName);
+                    navigation.navigate('Profile');
                 }).catch((error) => {
                     console.error("Error updating profile: ", error);
                 });
@@ -69,7 +70,8 @@ export default function CreateAccount({ navigation }) {
                     alert('The email is already in use.');
                 }
             });
-    }
+    };
+
     // console.log(auth.currentUser); // For Debugging
 
     const [fontsLoaded] = useFonts({

@@ -7,6 +7,8 @@ const handleItemType = (item) => {
 
 const getUser = async () => {
     const user = auth.currentUser;
+    const userEmail = user.email;
+    console.log("User email:", userEmail);
     try {
         const users = collection(db, 'users');
         const q = query(users, where('email', '==', user.email));
@@ -74,6 +76,7 @@ const addToPortfolio = async (item, type, level) => {
         console.log("Portfolio ID not found.");
     }
 }
+
 
 
 const removeFromPortfolio = async (item, type) => {
