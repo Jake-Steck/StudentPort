@@ -191,6 +191,9 @@ export default function Profile({ route }) {
             </ScrollView>
             <View style={styles.gap} />
             <Text style={styles.headerText}>Achievements</Text>
+            <View style={styles.achievementContainer}>
+
+            </View>
         </View>
     );
 }
@@ -244,4 +247,12 @@ const styles = StyleSheet.create({
     currGapEnd: {
         paddingRight: 45,
     },
+    achievementContainer: {
+        alignSelf: 'center',
+        backgroundColor: "lightgray",
+        width: 350,
+        height: 175,
+        borderRadius: 24,
+        marginTop: 10
+    }
 });
