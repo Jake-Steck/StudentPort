@@ -1,7 +1,10 @@
-<h1 align="center">Welcome to fbla24 👋</h1>
+<h1 align="center">Welcome to StudentPort 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 </p>
+
+## What is StudentPort?
+StudentPort is the ultimate app for students to showcase their achievements and activities. Students can enter items to their individual portfolio from anything from over 50 classes with an option for CP/Regular & Honors/Accelerated all the way to the amount of hours of community service they have completed!
 
 ## Install the Following Dependencies
 Use npm install, or npx expo install (if you have expo installed)
