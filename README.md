@@ -4,8 +4,8 @@
 </p>
 
 ## Install the Following Dependencies
+# Use npm install, or npx expo install (if you have expo installed)
 
-```sh
 - expo-google-fonts/poppins
 - expo/webpack-config
 - react-native-async-storage/async-storage
@@ -25,7 +25,7 @@
 - react-native-safe-area-context
 - react-native-screens
 - react-native-web
-```
+
 
 ## Usage
 
