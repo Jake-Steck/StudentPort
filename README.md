@@ -4,7 +4,7 @@
 </p>
 
 ## Install the Following Dependencies
-# Use npm install, or npx expo install (if you have expo installed)
+### Use npm install, or npx expo install (if you have expo installed)
 
 - expo-google-fonts/poppins
 - expo/webpack-config
