@@ -39,8 +39,9 @@ Use npm install, or npx expo install (if you have expo installed)
 6. Run the code using the [Expo](https://docs.expo.dev/more/expo-cli/) run commands
 
 ## LICENSE 
+GPL-3.0 license
 
-Give a ⭐️ if this project helped you!
+### Give a ⭐️ if this project helped you!
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
