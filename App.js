@@ -27,7 +27,7 @@ export default function App() {
       <Stack.Navigator
         initialRouteName="OpenScreen"
         screenOptions={{
-          headerShown: true // on for debugging purposes
+          headerShown: false // on for debugging purposes
         }}
       >
         <Stack.Screen name="OpenScreen" component={OpenScreen} />

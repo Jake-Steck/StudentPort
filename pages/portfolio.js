@@ -48,6 +48,9 @@ import AthleticModal from '../components/athleticModal';
 import ClubModal from '../components/clubModal';
 import ServiceModal from '../components/serviceModal';
 
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
 const Portfolio = ({ route }) => {
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
@@ -82,6 +85,8 @@ const Portfolio = ({ route }) => {
         visible: false,
         item: null,
     });
+
+    const navigation = useNavigation();
 
     useEffect(() => {
         filterData();
@@ -372,6 +377,10 @@ const Portfolio = ({ route }) => {
 
     return (
         <View style={styles.container}>
+            <View style={styles.textContainer}>
+                <Text style={styles.heading}>Portfolio</Text>
+                <Ionicons style={styles.profile} name="person-circle-sharp" size={50} color="black" onPress={() => navigation.push("Profile")} />
+            </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollViewContent}>
                 <View style={styles.filterContainer}>
                     {renderTabs()}
@@ -420,6 +429,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f0f0f0',
         padding: 15,
+        top: 50,
     },
     filterContainer: {
         flexDirection: 'row',
@@ -455,5 +465,16 @@ const styles = StyleSheet.create({
     },
     selectedFilter: {
         backgroundColor: '#1c5c85',
+    },
+    textContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingBottom: 10,
+    },
+
+    heading: {
+        fontFamily: 'Poppins_700Bold',
+        fontSize: 25,
     },
 });
