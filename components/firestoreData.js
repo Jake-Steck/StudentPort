@@ -52,20 +52,29 @@ const getUserPortfolioID = async () => {
     }
 }
 
+// Function to add an item to the user's portfolio
 const addToPortfolio = async (item, type, level) => {
-    const uid = await getUser(); // Use await to get the user ID
-    // const type = handleItemType(item);
-    const portfolioID = await getUserPortfolioID(); // Use await to get the portfolio ID
+    // Use await to get the user ID
+    const uid = await getUser();
 
+    // Use await to get the portfolio ID
+    const portfolioID = await getUserPortfolioID();
+
+    // Check if the portfolio ID is available
     if (portfolioID) {
+        // Create a reference to the user's portfolio document in Firestore
         const portfolioDocRef = doc(db, `users/${uid}/portfolio/${portfolioID}`);
+
+        // Update the document by adding the item to the specified type array with its level
         await updateDoc(portfolioDocRef, {
             [type]: arrayUnion(item + " - " + level)
         });
     } else {
+        // Log an error message if the portfolio ID is not found
         console.log("Portfolio ID not found.");
     }
 }
+
 
 const removeFromPortfolio = async (item, type) => {
     const uid = await getUser(); // Use await to get the user ID

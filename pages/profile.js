@@ -158,6 +158,8 @@ const styles = StyleSheet.create({
         right: 0,
         height: 100,
         backgroundColor: '#3498db',
+
+
     },
     push: {
         left: '200%',
