@@ -12,6 +12,7 @@ import Classes from './pages/classes';
 import Sports from './pages/sports';
 import Clubs from './pages/clubs';
 import Service from './pages/service';
+import TestScores from './pages/testScores';
 import Other from './pages/other';
 import Portfolio from './pages/portfolio';
 import classesData from './components/portfolioData/classes_data.json';
@@ -46,6 +47,7 @@ export default function App() {
         <Stack.Screen name="Clubs" component={Clubs} />
         <Stack.Screen name="Service" component={Service} />
         <Stack.Screen name="Other" component={Other} />
+        <Stack.Screen name="TestScores" component={TestScores} />
       </Stack.Navigator>
     </NavigationContainer>
   );
