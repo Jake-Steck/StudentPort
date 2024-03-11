@@ -10,7 +10,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
-
+import { addToPortfolio } from '../components/firestoreData';
 
 export default function TestScores({ route }) {
     // const { userInfo } = route.params;
@@ -35,19 +35,19 @@ export default function TestScores({ route }) {
     const [displayComposite, setDisplayComposite] = useState(0);
 
     function updateEnglish(t) {
-        if(selectedTest == "ACT") {
-            if(readingOrWriting == "R") {
+        if (selectedTest == "ACT") {
+            if (readingOrWriting == "R") {
                 setACTReading(t);
-            } else if(readingOrWriting == "W") {
+            } else if (readingOrWriting == "W") {
                 setACTWriting(t);
             }
-        } else if(selectedTest == "SAT") {
+        } else if (selectedTest == "SAT") {
             setSATEnglish(t);
         }
     }
 
     function updateMath(t) {
-        if(selectedTest == "ACT") {
+        if (selectedTest == "ACT") {
             setACTMath(t);
         } else {
             setSATMath(t);
@@ -55,7 +55,7 @@ export default function TestScores({ route }) {
     }
 
     const keepValuesEnglish = () => {
-        if(selectedTest == "ACT") {
+        if (selectedTest == "ACT") {
             if (readingOrWriting === "R") {
                 return actReading;
             } else {
@@ -67,7 +67,7 @@ export default function TestScores({ route }) {
     };
 
     const keepScience = () => {
-        if(selectedTest == "SAT") {
+        if (selectedTest == "SAT") {
             return 0;
         } else {
             return actScience;
@@ -75,7 +75,7 @@ export default function TestScores({ route }) {
     }
 
     const keepValuesMath = () => {
-        if(selectedTest == "ACT") {
+        if (selectedTest == "ACT") {
             return actMath;
         } else {
             return satMath;
@@ -87,12 +87,13 @@ export default function TestScores({ route }) {
             // Ensure satEnglish and satMath are valid numbers
             const parsedSatEnglish = parseInt(satEnglish);
             const parsedSatMath = parseInt(satMath);
-            
+
             if (!isNaN(parsedSatEnglish) && !isNaN(parsedSatMath)) {
                 const satComposite = parsedSatEnglish + parsedSatMath;
                 setSATComposite(satComposite);
                 setDisplayComposite(String(satComposite));
                 console.log("SAT Composite Score:", satComposite);
+                addToPortfolio("SAT", "testing", satComposite);
             } else {
                 alert("Invalid SAT Score")
                 console.error("Invalid SAT scores");
@@ -103,12 +104,14 @@ export default function TestScores({ route }) {
             const parsedActReading = parseInt(actReading);
             const parsedActWriting = parseInt(actWriting);
             const parsedActScience = parseInt(actScience);
-            
+
             if (!isNaN(parsedActMath) && !isNaN(parsedActReading) && !isNaN(parsedActWriting) && !isNaN(parsedActScience)) {
                 const actComposite = Math.round((parsedActMath + parsedActReading + parsedActWriting + parsedActScience) / 4);
                 setACTComposite(actComposite);
                 setDisplayComposite(String(actComposite));
+                addToPortfolio("ACT", "testing", actComposite);
                 console.log("ACT Composite Score:", actComposite);
+
             } else {
                 alert("Invalid ACT Score")
                 console.error("Invalid ACT scores");
@@ -118,7 +121,7 @@ export default function TestScores({ route }) {
             console.error("Invalid test type");
         }
     }
-    
+
 
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
@@ -140,7 +143,7 @@ export default function TestScores({ route }) {
                     ]}
                     onPress={() => setSelectedTest('SAT')}
                 >
-                 <Text
+                    <Text
                         style={[
                             styles.testButtonText,
                             selectedTest === 'SAT' && styles.selectedTestButtonText
@@ -156,7 +159,7 @@ export default function TestScores({ route }) {
                     ]}
                     onPress={() => setSelectedTest('ACT')}
                 >
-                     <Text
+                    <Text
                         style={[
                             styles.testButtonText,
                             selectedTest === 'ACT' && styles.selectedTestButtonText
@@ -172,14 +175,14 @@ export default function TestScores({ route }) {
                         <Text style={[
                             styles.iconText,
                             selectedTest == 'ACT' && readingOrWriting == "W" && styles.unselectedSection
-                            ]} onPress={() => toggleReading("R")}>Reading</Text>
+                        ]} onPress={() => toggleReading("R")}>Reading</Text>
                         <Text style={styles.iconText}>/</Text>
                         <Text style={[
                             styles.iconText,
                             selectedTest == 'ACT' && readingOrWriting == "R" && styles.unselectedSection
                         ]} onPress={() => toggleReading("W")}>Writing</Text>
                     </View>
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         placeholder='Reading / Writing Score'
                         onChangeText={text => updateEnglish(text)}
@@ -189,7 +192,7 @@ export default function TestScores({ route }) {
                 </View>
                 <View style={styles.inputBoxes}>
                     <Text style={styles.iconText}>Math</Text>
-                    <TextInput 
+                    <TextInput
                         //onChangeText={text => setPassword(text)}
                         style={styles.input}
                         placeholder='Math Score'
@@ -200,15 +203,15 @@ export default function TestScores({ route }) {
                 <View style={styles.inputBoxes}>
                     <Text style={
                         styles.iconText
-                        }>Science</Text>
-                    <TextInput 
+                    }>Science</Text>
+                    <TextInput
                         //onChangeText={text => setPassword(text)}
                         style={[
                             styles.input,
                             selectedTest == "SAT" && styles.blockedInput
                         ]}
                         placeholder='Science Score'
-                        editable={selectedTest=="ACT" && true}
+                        editable={selectedTest == "ACT" && true}
                         onChangeText={text => setACTScience(text)}
                         value={keepScience()}
                     />
@@ -230,6 +233,7 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignContent: 'center',
+        top: 80,
     },
     classContainer: {
         flexDirection: 'row',
@@ -296,7 +300,7 @@ const styles = StyleSheet.create({
     },
     selectedTestButton: {
         backgroundColor: '#262626', // Change to the color you want for selected button
-        
+
     },
     selectedTestButtonText: {
         color: 'white', // Change to the color you want for selected button text
