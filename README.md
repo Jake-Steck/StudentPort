@@ -38,7 +38,7 @@ Use npm install, or npx expo install (if you have expo installed)
 5. Enter the code directory
 6. Run the code using the [Expo](https://docs.expo.dev/more/expo-cli/) run commands
 
-## Show your support
+## LICENSE 
 
 Give a ⭐️ if this project helped you!
 
