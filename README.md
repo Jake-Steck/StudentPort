@@ -6,7 +6,25 @@
 ## Install the Following Dependencies
 
 ```sh
-npm install @react-navigation/native-stack @react-navigation/native @expo-google-fonts/poppins expo-image-picker 
+- expo-google-fonts/poppins
+- expo/webpack-config
+- react-native-async-storage/async-storage
+- react-navigation/native
+- react-navigation/native-stack
+- expo
+- expo-auth-session
+- expo-crypto
+- expo-image-picker
+- expo-splash-screen
+- expo-status-bar
+- expo-web-browser
+- firebase
+- react
+- react-dom
+- react-native
+- react-native-safe-area-context
+- react-native-screens
+- react-native-web
 ```
 
 ## Usage
