@@ -1,9 +1,11 @@
 {
   "cli": {
-    "version": ">= 5.9.3"
+    "version": ">= 5.9.3",
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
+      "developmentClient": true,
       "distribution": "internal",
       "android": {
         "gradleCommand": ":app:assembleDebug"
@@ -17,6 +19,7 @@
       "distribution": "internal"
     },
     "production": {
+      "autoIncrement": true,
       "channel": "production"
     },
     "staging": {
