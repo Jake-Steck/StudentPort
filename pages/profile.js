@@ -42,33 +42,34 @@ export default function Profile() {
 
     return (
         <View style={styles.container}>
+            <View style={styles.bgCircle}></View>
             <Text style={styles.headerText}>Your Classes</Text>
             <Classes reloadClasses={reloadClasses} />
             <View style={styles.gap} />
             <Text style={styles.headerText}>Extra Curriculars</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollViewContent}>
-                <TouchableOpacity onPress={() => navigation.navigate('Sports')}>
+                <TouchableOpacity onPress={() => navigation.push('Sports')}>
                     <View style={styles.curricularContainer}>
                         <MaterialIcons name="sports-football" size={50} color="black" />
                         <Text style={styles.iconText}>Sports</Text>
                     </View>
                 </TouchableOpacity>
                 <View style={styles.currGap} />
-                <TouchableOpacity onPress={() => navigation.navigate('Clubs')}>
+                <TouchableOpacity onPress={() => navigation.push('Clubs')}>
                     <View style={styles.curricularContainer}>
                         <MaterialIcons name="groups" size={50} color="black" />
                         <Text style={styles.iconText}>Clubs</Text>
                     </View>
                 </TouchableOpacity>
                 <View style={styles.currGap} />
-                <TouchableOpacity onPress={() => navigation.navigate('Service')}>
+                <TouchableOpacity onPress={() => navigation.push('Service')}>
                     <View style={styles.curricularContainer}>
                         <FontAwesome5 name="hands-helping" size={50} color="black" />
                         <Text style={styles.iconText}>Service</Text>
                     </View>
                 </TouchableOpacity>
                 <View style={styles.currGap} />
-                <TouchableOpacity onPress={() => navigation.navigate('Other')}>
+                <TouchableOpacity onPress={() => navigation.push('Other')}>
                     <View style={styles.curricularContainer}>
                         <AntDesign name="pushpin" size={50} color="black" />
                         <Text style={styles.iconText}>Other</Text>
@@ -78,7 +79,19 @@ export default function Profile() {
             </ScrollView>
             <View style={styles.gap} />
             <Text style={styles.headerText}>Achievements</Text>
-            <View style={styles.achievementContainer} />
+            <TouchableOpacity style={styles.achievementContainer} onPress={() => navigation.push("Achievements")}>
+                <View style={styles.trophy}>
+                    <MaterialCommunityIcons name="trophy" size={100} color="black"/>
+                </View>
+                <Text style={[styles.achievementText]}>Add your achievements</Text>
+                <View style={[styles.accentLine]}></View>
+            </TouchableOpacity>
+            <View style={styles.gap} />
+            <Text style={[styles.headerText]}>Test Scores</Text>
+            <TouchableOpacity style={styles.testScoresContainer} onPress={() => navigation.push("TestScores")}>
+                <Text style={[styles.testScoresText]}>Update your Test Scores!</Text>
+                <View style={[styles.accentLine2]}></View>
+            </TouchableOpacity>
             <View style={styles.floor}>
                 <View style={styles.signOut}>
                     <Text style={styles.signOut} onPress={SignOut}>Sign Out</Text>
@@ -115,6 +128,23 @@ const styles = StyleSheet.create({
         left: 35,
         fontWeight: 'bold',
 
+    },
+    headerText2: {
+        fontFamily: 'Poppins_600SemiBold',
+        fontSize: 20,
+        textAlign: 'left',
+        left: 35,
+        fontWeight: 'bold',
+        marginTop: 10,
+    },
+    achievementText: {
+        fontFamily: 'Poppins_600SemiBold',
+        fontSize: 16,
+        textAlign: 'left',
+        left: 130,
+        fontWeight: 'bold',
+        bottom: 70,
+        width: 120,
     },
     gap: {
         marginBottom: 20,
@@ -153,13 +183,11 @@ const styles = StyleSheet.create({
     floor: {
         flexDirection: 'row',
         position: 'absolute',
-        bottom: -140,
+        bottom: -180,
         left: 0,
         right: 0,
         height: 100,
         backgroundColor: '#3498db',
-
-
     },
     push: {
         left: '200%',
@@ -172,4 +200,59 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins_600SemiBold',
         color: 'black',
     },
+    trophy: {
+        borderRadius: 12,
+        width: "30%",
+        //backgroundColor: 'white',
+        //borderColor: "#3498db",
+        //borderWidth: 4,
+        alignItems: 'center',
+        top: "20%",
+        left: "3%",
+    },
+    accentLine: {
+        width: "45%", 
+        height: 5, 
+        backgroundColor: "#3498db",
+        alignSelf: 'center',
+        bottom: 60,
+        marginLeft: 55,
+        borderRadius: 24,
+    },
+    testScoresContainer: {
+        alignSelf: 'center',
+        backgroundColor: "lightgray",
+        width: 350,
+        height: 100,
+        borderRadius: 24,
+        marginTop: 10
+    },
+    testScoresText: {
+        fontFamily: 'Poppins_600SemiBold',
+        fontSize: 20,
+        textAlign: 'left',
+        left: 40,
+        fontWeight: 'bold',
+        top: 15,
+        width: 150,
+    },
+    accentLine2: {
+        width: "65%", 
+        height: 5, 
+        backgroundColor: "#3498db",
+        alignSelf: 'left',
+        top: 20,
+        marginLeft: 40,
+        borderRadius: 24,
+    },
+    bgCircle: {
+        backgroundColor: "#3498db",
+        width: 450,
+        height: 375,
+        top: -200,
+        borderRadius: 200,
+        alignSelf: 'center',
+        opacity: 0.8,
+        position: 'absolute',
+    }
 });
