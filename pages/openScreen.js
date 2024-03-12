@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity, } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins'; // Font library loaded in
 
-const homeImg = 'https://assets.api.uizard.io/api/cdn/stream/78f4b240-40ec-430a-8851-5f03a867268a.png'; // Variable for image displayed on home screen
+const homeImg = 'https://ibb.co/Gnchy6z'; // Variable for image displayed on home screen
 
 
 // All components loaded onto the opening screen
@@ -42,12 +42,12 @@ export default function OpenScreen({ navigation }) {
             height: 200,
             justifyContent: "flex-start",
             alignItems: "center",
-            top: -80,
+            top: -50,
         },
         image: {
             width: 400,
             height: 270,
-            resizeMode: "contain",
+            resizeMode: 'contain',
         },
         cardContainer: {
             top: -150,
@@ -65,8 +65,8 @@ export default function OpenScreen({ navigation }) {
             </View>
             <View style={styles.imageContainer}>
                 <Image
-                    style={styles.image}
-                    source={{ uri: homeImg }}
+                    style={{ borderRadius: 20, height: 200, width: 200, resizeMode: 'contain' }}
+                    source={{ uri: "https://i.ibb.co/xXJ4Wkx/Untitled-design.png" }}
                 />
             </View>
             <Text style={styles.header}>Welcome to {'\n'}StudentPort!</Text>

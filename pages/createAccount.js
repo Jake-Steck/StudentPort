@@ -32,7 +32,7 @@ export default function CreateAccount({ navigation }) {
         await addDoc(createSubCollection, {
             classes: [],
             athletics: [],
-            achievements: [[]],
+            achievements: [],
             service: [],
             clubs: [],
             testing: [],
