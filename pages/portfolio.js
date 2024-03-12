@@ -30,6 +30,7 @@ import athleticsData from '../components/portfolioData/athletics_data.json';
 import clubsData from '../components/portfolioData/clubs_data.json';
 import serviceData from '../components/portfolioData/service_data.json';
 import testingData from '../components/portfolioData/testing_data.json';
+import achievementData from '../components/portfolioData/achievement_data.json';
 
 // Class Imports
 import AllClasses from '../components/portfolioData/allClasses';
@@ -110,6 +111,8 @@ const Portfolio = ({ route }) => {
             setFilteredData(serviceData);
         } else if (selectedTab === 'Testing') {
             setFilteredData(testingData);
+        } else if (selectedTab === 'Achievements') {
+            setFilteredData(achievementData);
         } else {
             setFilteredData(category.data);
         }
@@ -127,6 +130,8 @@ const Portfolio = ({ route }) => {
             setServiceModalVisible({ visible: true, item: item.label });
         } else if (item.type === 'Testing') {
             navigation.push('TestScores');
+        } else if (item.type === 'Achievements') {
+            navigation.push('Achievements');
         }
     };
 
@@ -147,7 +152,7 @@ const Portfolio = ({ route }) => {
     };
 
     const renderTabs = () => {
-        const tabs = ['All', 'Classes', 'Athletics', 'Clubs', 'Service', 'Testing'];
+        const tabs = ['All', 'Classes', 'Athletics', 'Clubs', 'Service', 'Testing', 'Achievements'];
 
         return tabs.map((type, index) => (
 

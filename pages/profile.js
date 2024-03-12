@@ -71,26 +71,20 @@ export default function Profile() {
                 <View style={styles.currGap} />
                 <TouchableOpacity onPress={() => navigation.push('Other')}>
                     <View style={styles.curricularContainer}>
-                        <AntDesign name="pushpin" size={50} color="black" />
-                        <Text style={styles.iconText}>Other</Text>
+                        <MaterialCommunityIcons name="pencil" size={50} color="black" />
+                        <Text style={styles.iconText}>Testing</Text>
                     </View>
                 </TouchableOpacity>
                 <View style={styles.currGapEnd} />
             </ScrollView>
             <View style={styles.gap} />
             <Text style={styles.headerText}>Achievements</Text>
-            <TouchableOpacity style={styles.achievementContainer} onPress={() => navigation.push("Achievements")}>
+            <TouchableOpacity style={styles.achievementContainer} onPress={() => navigation.push("ShowAchievements")}>
                 <View style={styles.trophy}>
-                    <MaterialCommunityIcons name="trophy" size={100} color="black"/>
+                    <MaterialCommunityIcons name="trophy" size={100} color="black" />
                 </View>
                 <Text style={[styles.achievementText]}>Add your achievements</Text>
                 <View style={[styles.accentLine]}></View>
-            </TouchableOpacity>
-            <View style={styles.gap} />
-            <Text style={[styles.headerText]}>Test Scores</Text>
-            <TouchableOpacity style={styles.testScoresContainer} onPress={() => navigation.push("TestScores")}>
-                <Text style={[styles.testScoresText]}>Update your Test Scores!</Text>
-                <View style={[styles.accentLine2]}></View>
             </TouchableOpacity>
             <View style={styles.floor}>
                 <View style={styles.signOut}>
@@ -183,7 +177,7 @@ const styles = StyleSheet.create({
     floor: {
         flexDirection: 'row',
         position: 'absolute',
-        bottom: -180,
+        bottom: -140,
         left: 0,
         right: 0,
         height: 100,
@@ -211,8 +205,8 @@ const styles = StyleSheet.create({
         left: "3%",
     },
     accentLine: {
-        width: "45%", 
-        height: 5, 
+        width: "45%",
+        height: 5,
         backgroundColor: "#3498db",
         alignSelf: 'center',
         bottom: 60,
@@ -237,8 +231,8 @@ const styles = StyleSheet.create({
         width: 150,
     },
     accentLine2: {
-        width: "65%", 
-        height: 5, 
+        width: "65%",
+        height: 5,
         backgroundColor: "#3498db",
         alignSelf: 'left',
         top: 20,

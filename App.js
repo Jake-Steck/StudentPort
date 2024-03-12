@@ -13,8 +13,10 @@ import Sports from './pages/sports';
 import Clubs from './pages/clubs';
 import Service from './pages/service';
 import TestScores from './pages/testScores';
+import Achievements from './pages/achievements';
 import Other from './pages/other';
 import Portfolio from './pages/portfolio';
+import ShowAchievements from './pages/showAchievements';
 import classesData from './components/portfolioData/classes_data.json';
 import athleticsData from './components/portfolioData/athletics_data.json';
 
@@ -48,6 +50,8 @@ export default function App() {
         <Stack.Screen name="Service" component={Service} />
         <Stack.Screen name="Other" component={Other} />
         <Stack.Screen name="TestScores" component={TestScores} />
+        <Stack.Screen name="Achievements" component={Achievements} />
+        <Stack.Screen name="ShowAchievements" component={ShowAchievements} />
       </Stack.Navigator>
     </NavigationContainer>
   );

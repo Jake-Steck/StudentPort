@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, FlatList, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_300Light, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
-import { getUser, removeFromPortfolio, getClubs } from '../components/firestoreData';
 import { useNavigation } from '@react-navigation/native';
+import { addToPortfolio } from '../components/firestoreData';
 
 export default function Achievements() {
     const [fontsLoaded] = useFonts({
@@ -10,60 +10,51 @@ export default function Achievements() {
         Poppins_300Light,
         Poppins_600SemiBold,
     });
-    const [clubs, setClubs] = useState([]);
-    const [itemClicked, setItemClicked] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const userId = await getUser();
-                const response = await getClubs(userId);
-                setClubs(response);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
 
-            } catch (error) {
-                console.error('Error fetching sports:', error);
-            }
-        };
-        fetchData();
+    const navigation = useNavigation();
 
-    }, [itemClicked]);
+    const handleSubmission = async () => {
+        // Perform any validation checks if needed
+
+        try {
+            // Call the addToPortfolio function with the entered information
+            await addToPortfolio(`${name} - ${description}`, "achievements");
+
+            navigation.push('Profile');
+        } catch (error) {
+            console.error('Error adding to portfolio:', error);
+            // Handle errors or provide user feedback as needed
+        }
+    };
+
 
     if (!fontsLoaded) {
         return <Text>Loading...</Text>; // or any loading indicator
     }
 
-    const handleRemove = (item) => {
-        removeFromPortfolio(item, "clubs");
-        setItemClicked(!itemClicked);
-    }
-
-    const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.itemContainer} onPress={() => handleRemove(item)}>
-            <Text style={styles.itemText}>{item}</Text>
-        </TouchableOpacity>
-    );
-
     return (
         <View style={styles.container}>
-            <View style={styles.gap}/>
+            <View style={styles.gap} />
             <Text style={styles.heading}>Achievements</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.iconText}>New Achievement</Text>
                 <TextInput
-                            style={[
-                                styles.input,
-                            ]}
-                            placeholder='Enter New Achievement'
-                    />
+                    style={styles.input}
+                    placeholder='Enter Achievement'
+                    onChangeText={setName}
+                />
+
                 <Text style={styles.iconText}>Description / Details</Text>
                 <TextInput
-                            style={[
-                                styles.input,
-                            ]}
-                            placeholder='Enter Description'
-                    />
+                    style={styles.input}
+                    placeholder='Enter Description'
+                    onChangeText={setDescription}
+                />
             </View>
-            <TouchableOpacity style={styles.submitButton}>
+            <TouchableOpacity style={styles.submitButton} onPress={handleSubmission}>
                 <Text style={styles.submitButtonText}>Submit</Text>
             </TouchableOpacity>
             <TouchableOpacity>
@@ -86,24 +77,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         top: 30,
     },
-    itemContainer: {
-        borderRadius: 8,
-        padding: 15,
-        marginBottom: 10,
-        elevation: 2,
-        borderWidth: 2,
-        borderColor: 'black',
-        backgroundColor: 'white',
-    },
-    itemText: {
-        fontFamily: 'Poppins_300Light',
-        fontSize: 18,
-    },
     inputContainer: {
         borderRadius: 24,
         width: 350,
         height: 240,
-        backgroundColor: "lightgray",
+        backgroundColor: 'lightgray',
         alignSelf: 'center',
         alignItems: 'left',
         top: 40,
@@ -119,7 +97,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(252,252,252,0.86)',
         color: '#222224',
         fontSize: 14,
-        //fontFamily: 'Poppins_300Light',
         lineHeight: 22,
         marginLeft: 10,
     },
@@ -132,7 +109,7 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     gap: {
-        marginTop: 15, 
+        marginTop: 15,
     },
     submitButtonText: {
         color: 'black',

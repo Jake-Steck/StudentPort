@@ -61,7 +61,9 @@ const addToPortfolio = async (item, type, level) => {
 
     // Use await to get the portfolio ID
     const portfolioID = await getUserPortfolioID();
-
+    if (level === undefined) {
+        level = "";
+    }
     // Check if the portfolio ID is available
     if (portfolioID) {
         // Create a reference to the user's portfolio document in Firestore
@@ -150,6 +152,22 @@ const getSports = async (userId) => {
     }
 }
 
+const getAchievements = async (userId) => {
+    try {
+        const portfolioID = await getUserPortfolioID(userId);
+        const portfolioDoc = await getDoc(doc(db, `users/${userId}/portfolio/${portfolioID}`));
+
+        if (portfolioDoc.exists()) {
+            const portfolioData = portfolioDoc.data();
+            const achievements = portfolioData ? portfolioData.achievements || [] : [];
+            return achievements;
+        }
+    } catch (e) {
+        console.error("Error fetching achievements:", e);
+        return [];
+    }
+}
+
 const getClubs = async (userId) => {
     try {
         const portfolioID = await getUserPortfolioID(userId);
@@ -207,4 +225,4 @@ const getOther = async (userId) => {
     }
 }
 
-export { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio, getClubs, getService, getOther, getTesting };
+export { getUser, getUserPortfolioID, addToPortfolio, getClasses, getSports, removeFromPortfolio, getClubs, getService, getOther, getTesting, getAchievements };
