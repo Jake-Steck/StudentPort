@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
         alignSelf: 'baseline',
         color: 'black',
         top: 60,
-        right: 220
+        right: 220,
+        width: '80%'
     },
     classContainer: {
         flexDirection: 'row',
@@ -125,9 +126,10 @@ const styles = StyleSheet.create({
     horizontal: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
     },
     remove: {
         top: 0,
+        paddingLeft: 10
+
     },
 });
