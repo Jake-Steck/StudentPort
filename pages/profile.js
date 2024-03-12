@@ -176,8 +176,8 @@ const styles = StyleSheet.create({
 
     floor: {
         flexDirection: 'row',
-        position: 'fixed',
-        bottom: -140,
+        position: 'absolute',
+        top: 752,
         left: 0,
         right: 0,
         height: 100,
