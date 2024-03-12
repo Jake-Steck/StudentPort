@@ -38,6 +38,8 @@ export default function SignIn({ navigation }) {
                     alert("Invalid Credentials");
                 } else if (errorCode === "auth/invalid-email") {
                     alert("Invalid Email");
+                } else {
+                    alert(errorMessage);
                 }
             });
     }

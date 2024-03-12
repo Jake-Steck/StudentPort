@@ -68,6 +68,8 @@ export default function CreateAccount({ navigation }) {
                 }
                 if (errorCode === 'auth/email-already-in-use') {
                     alert('The email is already in use.');
+                } else {
+                    alert(errorMessage);
                 }
             });
     };

@@ -179,14 +179,14 @@ const styles = StyleSheet.create({
     floor: {
         flexDirection: 'row',
         position: 'absolute',
-        top: 752,
+        top: 665,
         left: 0,
         right: 0,
         height: 100,
         backgroundColor: '#3498db',
     },
     push: {
-        left: '200%',
+        left: '180%',
         top: 10,
     },
     signOut: {
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     git: {
-        left: '210%',
+        left: '185%',
         top: 20,
     },
     trophy: {
