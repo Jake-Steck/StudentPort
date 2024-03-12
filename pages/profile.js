@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, Button, TouchableOpacity, ScrollView, Linking } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -9,7 +9,6 @@ import Classes, { ClassCard } from './classes'; // Import the ClassCard componen
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
@@ -92,6 +91,9 @@ export default function Profile() {
                 </View>
                 <View style={styles.push}>
                     <MaterialCommunityIcons onPress={() => navigation.push('Portfolio')} name="plus-circle" size={70} color="black" />
+                </View>
+                <View style={styles.git}>
+                    <AntDesign name="github" size={50} color="black" onPress={() => Linking.openURL("https://github.com/Jake-Steck/StudentPort")} />
                 </View>
             </View>
         </View >
@@ -193,6 +195,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'Poppins_600SemiBold',
         color: 'black',
+    },
+    git: {
+        left: '210%',
+        top: 20,
     },
     trophy: {
         borderRadius: 12,
