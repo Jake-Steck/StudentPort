@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "fbla24",
-    "scheme": "fbla24",
+    "name": "StudentPort",
+    "scheme": "StudentPort",
     "slug": "fbla24",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -16,8 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.jrsteck.fbla24"
+      "bundleIdentifier": "com.jrsteck.fbla24",
+      "buildNumber": "2.0.0"
     },
     "android": {
       "adaptiveIcon": {
@@ -33,6 +33,10 @@
         "projectId": "230678d2-0c71-4e3e-9bf9-88bae5a59070"
       }
     },
-    "owner": "jrsteck"
+    "owner": "jrsteck",
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/230678d2-0c71-4e3e-9bf9-88bae5a59070"
+    }
   }
 }
